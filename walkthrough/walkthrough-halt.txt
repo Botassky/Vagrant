@@ -1,0 +1,15 @@
+.. _walkthrough-halt:
+
+仮想マシンを停止（シャットダウン）
+----------------------------------------------------------------------------------------------------
+仮想マシンを停止（シャットダウン）します。
+
+.. code-block::
+
+   vagrant halt
+
+.. code-block::
+
+   PS C:\vagrant\centos7> vagrant halt
+   ==> default: Attempting graceful shutdown of VM...
+   PS C:\vagrant\centos7>

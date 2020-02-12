@@ -1,0 +1,19 @@
+.. _walkthrough-suspend:
+
+仮想マシンをサスペンド
+----------------------------------------------------------------------------------------------------
+稼働中の仮想マシンをサスペンドします。
+
+.. code-block::
+
+   vagrant suspend
+
+.. code-block::
+
+   PS C:\vagrant\centos7> vagrant suspend
+   ==> default: Saving VM state and suspending execution...
+   PS C:\vagrant\centos7>
+
+Oracle VM VirtualBox マネージャーで確認すると、仮想マシンがサスペンドしていることがわかります。
+
+.. image:: img/2020-02-02_18h34_40.png

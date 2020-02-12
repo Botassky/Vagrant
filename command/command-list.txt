@@ -1,0 +1,70 @@
+.. _command-list:
+
+コマンドリスト
+----------------------------------------------------------------------------------------------------
+
+.. _command-list-box:
+
+Box ファイルの操作
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vagrant box add
+   - :command:`vagrant box add Boxファイル名`
+   - :command:`vagrant box add Boxファイル名 URL`
+   - :command:`vagrant box add Boxファイル名 path`
+   - Box ファイルをダウンロードする。
+   - ダウンロード先を指定しない場合 `Vagrant Cloud <https://app.vagrantup.com/boxes/search>`_ からダウンロードする。
+   - Vagrant Cloud 以外、例えば GitHub からダウンロードするときはダウンロード先の URL を指定する。
+   - ダウンロード先を path で指定できるときはその path を指定する。
+
+vagrant box remove
+   - :command:`vagrant box remove Boxファイル名`
+   - ダウンロードした Box ファイルから指定した Box ファイルを廃棄（削除）する。
+
+vagrant box list
+   - :command:`vagrant box list`
+   - ダウンロード済みの Box ファイルを一覧で表示する。
+
+.. _command-list-vms:
+
+仮想マシンの操作
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vagrant init
+   - :command:`vagrant init Boxファイル名`
+   - 指定した Box ファイル用の Vagrantfile が作成される。
+
+vagrant up
+   - :command:`vagrant up`
+   - 仮想マシンを起動する。
+   - 仮想マシンが作成されていないときは仮想マシンの作成　→　起動する。
+   - Box ファイルがダウンロードしていないときはダウンロードする。
+   - サスペンド状態の仮想マシンをリジュームする。
+
+vagrant halt
+   - :command:`vagrant halt`
+   - 仮想マシンを停止する。
+
+vagrant reload
+   - :command:`vagrant reload`
+   - 仮想マシンを再起動する。
+
+vagrant suspend
+   - :command:`vagrant suspend`
+   - 仮想マシンをサスペンドする。
+
+vagrant resume
+   - :command:`vagrant resume`
+   - サスペンド状態の仮想マシンをリジュームする。
+
+vagrant package
+   - :command:`vagrant package`
+   - 仮想マシンから Box ファイルを作成する。
+
+vagrant destroy
+   - :command:`vagrant destroy`
+   - 仮想マシンを廃棄（削除）する。
+
+vagrant ssh
+   - :command:`vagrant ssh`
+   - 仮想マシンに ssh 接続する。

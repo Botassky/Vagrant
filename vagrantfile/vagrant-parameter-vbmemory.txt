@@ -1,0 +1,11 @@
+.. _vagrant-parameter-vbmemory:
+
+vb.memory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- 仮想マシンのメモリサイズを MB （メガバイト）で指定します。
+
+.. code-block::
+
+   config.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+   end
