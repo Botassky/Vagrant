@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>用語 &mdash; Windows 10 で Vagrant を使う 2020/02/12 22:27 更新 ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="主な Vagrant コマンド" href="../command/command.html" />
+    <link rel="prev" title="環境構築" href="../environment/environment.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Windows 10 で Vagrant を使う
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Last update on 02/12/2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../environment/environment.html">環境構築</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-virtualbox">Oracle VirtualBox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-install">インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-vagrant">Vagrant</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-install">インストール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">用語</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#word-provider">プロバイダ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#word-provisioning">プロビジョニング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#box">Box ファイル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vagrantfile">Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../command/command.html">主な Vagrant コマンド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-about">コマンドとフォルダ／ファイルの関係図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-list">コマンドリスト</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#box">Box ファイルの操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#command-list-vms">仮想マシンの操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/help.html">ヘルプ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/walkthrough.html">ウォークスルー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrant">Vagrant 用のフォルダーを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#box">Box ファイルをダウンロード</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrantfile">Vagrantfile を作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-up">仮想マシンを起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-ssh">仮想マシンに接続</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-reload">仮想マシンを再起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-halt">仮想マシンを停止（シャットダウン）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-suspend">仮想マシンをサスペンド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-resume">仮想マシンをリジューム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-status">仮想マシンの状態を表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-destroy">仮想マシンを削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-remove">Box ファイルを削除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vms/vms.html">デフォルトの仮想マシンの仕様</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-hw">仮想マシン自体の仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-sw">仮想マシンの仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id4">デフォルトアカウント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id5">公開鍵認証</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vagrantfile/vagrantfile.html">Vagrantfile の編集</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-orignal">オリジナルの Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-struct">Vagrantfile の構造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-parameter">主なパラメーター</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-box">config.vm.box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-hostname">config.vm.hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-network">config.vm.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-name">vb.name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-gui">vb.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-memory">vb.memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-cpu">vb.cpu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-customize">vb.customize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-sample">Vagrantfile の設定例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../provisioning/provisioning.html">プロビジョニング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-about">プロビジョニングとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-timing">実行タイミング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-basic">基本動作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#vagrant-up"><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> の実行結果からプロビジョニングの動作確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provision">--provision オプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#id7">プロビジョニングの常時実行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell">シェル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell-inline">インラインスクリプト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell-external">エクスターナルスクリプト</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#ansible">Ansible</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../package/package.html">BOX ファイルの作成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-base">Box ファイルの元になる仮想マシンの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-create">Box ファイルの作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-create-options">主なオプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-create-use">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-use">作成した Box ファイルの使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-use-list">Box ファイルの登録</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-use-exec">Box ファイルを元に仮想マシンを作成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multi/multi.html">複数の仮想マシンの操作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-define">仮想マシンの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-same">共通した定義の取り扱い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/appendix.html">付録</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbadditions.html">プラグインを使用した VB Guest Additions のインストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbmanual.html">VB Guest Additions の手動インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-mac.html">IEEE が管理しているプライベート用 MAC アドレス（ 2020 年 2 月 9 日 確認）</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Windows 10 で Vagrant を使う</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>用語</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="words">
+<span id="id1"></span><h1>用語<a class="headerlink" href="#words" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Vagrant を使用するときの用語（キーワード）です。</p>
+<div class="section" id="word-provider">
+<span id="id2"></span><h2>プロバイダ<a class="headerlink" href="#word-provider" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Oracle VirtualBox や VMware Workstation などの仮想環境を指します。</p>
+</div>
+<div class="section" id="word-provisioning">
+<span id="id3"></span><h2>プロビジョニング<a class="headerlink" href="#word-provisioning" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansible などの構成管理ツールやシェルスクリプトでアプリケーションのインストールや設定を行うことです。</p>
+</div>
+<div class="section" id="box">
+<span id="word-box"></span><h2>Box ファイル<a class="headerlink" href="#box" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>仮想マシンのイメージファイル。<a class="reference external" href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a>や GitHub などから入手します。このファイルと<a class="reference internal" href="#word-vagrantfile"><span class="std std-ref">Vagrantfile</span></a>を使用して仮想マシンを作成します。作成した仮想マシンを元に Box ファイルを作成できます。</p>
+</div>
+<div class="section" id="vagrantfile">
+<span id="word-vagrantfile"></span><h2>Vagrantfile<a class="headerlink" href="#vagrantfile" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>仮想マシンの設定ファイル。 IP アドレスなどの設定情報を記載します。このファイルと<a class="reference internal" href="#word-box"><span class="std std-ref">Box ファイル</span></a>を使用して仮想マシンを作成します。</p>
+</div>
+<div class="section" id="vagrant">
+<span id="word-vagrant-command"></span><h2>Vagrant コマンド<a class="headerlink" href="#vagrant" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Vagrant を操作するためのコマンドのことです。 バージョン確認で実行した&quot;<strong class="command">vagrant --version</strong>&quot;も Vagrant コマンドです。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../command/command.html" class="btn btn-neutral float-right" title="主な Vagrant コマンド" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../environment/environment.html" class="btn btn-neutral float-left" title="環境構築" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Yoichi Muraoka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
