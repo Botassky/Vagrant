@@ -1,0 +1,2075 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>プロビジョニング &mdash; Windows 10 で Vagrant を使う 2020/02/13 23:16 更新 ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="BOX ファイルの作成" href="../package/package.html" />
+    <link rel="prev" title="Vagrantfile の編集" href="../vagrantfile/vagrantfile.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Windows 10 で Vagrant を使う
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Last update on 02/13/2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../environment/environment.html">環境構築</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-virtualbox">Oracle VirtualBox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-install">インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-vagrant">Vagrant</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-install">インストール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../words/words.html">用語</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#word-provider">プロバイダ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#word-provisioning">プロビジョニング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#box">Box ファイル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#vagrantfile">Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../command/command.html">主な Vagrant コマンド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-about">コマンドとフォルダ／ファイルの関係図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-list">コマンドリスト</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#box">Box ファイルの操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#command-list-vms">仮想マシンの操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/help.html">ヘルプ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/walkthrough.html">ウォークスルー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrant">Vagrant 用のフォルダーを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#box">Box ファイルをダウンロード</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrantfile">Vagrantfile を作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-up">仮想マシンを起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-ssh">仮想マシンに接続</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-reload">仮想マシンを再起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-halt">仮想マシンを停止（シャットダウン）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-suspend">仮想マシンをサスペンド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-resume">仮想マシンをリジューム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-status">仮想マシンの状態を表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-destroy">仮想マシンを削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-remove">Box ファイルを削除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vms/vms.html">デフォルトの仮想マシンの仕様</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-hw">仮想マシン自体の仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-sw">仮想マシンの仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id4">デフォルトアカウント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id5">公開鍵認証</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vagrantfile/vagrantfile.html">Vagrantfile の編集</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-orignal">オリジナルの Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-struct">Vagrantfile の構造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-parameter">主なパラメーター</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-box">config.vm.box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-hostname">config.vm.hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-network">config.vm.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-name">vb.name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-gui">vb.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-memory">vb.memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-cpu">vb.cpu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-customize">vb.customize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-sample">Vagrantfile の設定例</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">プロビジョニング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#provisioning-about">プロビジョニングとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#provisioning-timing">実行タイミング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#provisioning-basic">基本動作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vagrant-up"><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> の実行結果からプロビジョニングの動作確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provision">--provision オプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">プロビジョニングの常時実行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#provisioning-shell">シェル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#provisioning-shell-inline">インラインスクリプト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provisioning-shell-external">エクスターナルスクリプト</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ansible">Ansible</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../package/package.html">BOX ファイルの作成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-base">Box ファイルの元になる仮想マシンの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-create">Box ファイルの作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-create-options">主なオプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-create-use">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../package/package.html#package-use">作成した Box ファイルの使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-use-list">Box ファイルの登録</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../package/package.html#package-use-exec">Box ファイルを元に仮想マシンを作成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multi/multi.html">複数の仮想マシンの操作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-define">仮想マシンの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-same">共通した定義の取り扱い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/appendix.html">付録</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbadditions.html">プラグインを使用した VB Guest Additions のインストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbmanual.html">VB Guest Additions の手動インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-mac.html">IEEE が管理しているプライベート用 MAC アドレス（ 2020 年 2 月 9 日 確認）</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Windows 10 で Vagrant を使う</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>プロビジョニング</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="provisioning">
+<span id="id1"></span><h1>プロビジョニング<a class="headerlink" href="#provisioning" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="line-block">
+<div class="line"><strong>【トピックス】</strong></div>
+<div class="line">・ <a class="reference internal" href="#provisioning-about"><span class="std std-ref">プロビジョニングとは</span></a></div>
+<div class="line">・ <a class="reference internal" href="#provisioning-timing"><span class="std std-ref">実行タイミング</span></a></div>
+<div class="line">・ <a class="reference internal" href="#provisioning-basic"><span class="std std-ref">基本動作</span></a></div>
+<div class="line">・ <a class="reference internal" href="#provisioning-shell"><span class="std std-ref">シェル</span></a></div>
+<div class="line">　　・ <a class="reference internal" href="#provisioning-shell-inline"><span class="std std-ref">インラインスクリプト</span></a></div>
+<div class="line">　　・ <a class="reference internal" href="#provisioning-shell-external"><span class="std std-ref">エクスターナルスクリプト</span></a></div>
+<div class="line">・ <a class="reference internal" href="#provisioning-ansible"><span class="std std-ref">Ansible</span></a></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="provisioning-about">
+<span id="id2"></span><h2>プロビジョニングとは<a class="headerlink" href="#provisioning-about" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Vagrantfile と Box ファイルで仮想マシンを作成した後にシェルスクリプトや Ansible などの構成管理ツールを使用し、アプリケーションのインストールや各種設定などの処理を行うことです。処理は<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドの一部として動作します。</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>プロビジョニングの実行はユーザー vagrant が sudo 付きで実行します。</p>
+</div>
+<hr class="docutils" />
+</div>
+<div class="section" id="provisioning-timing">
+<span id="id3"></span><h2>実行タイミング<a class="headerlink" href="#provisioning-timing" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>プロビジョニングは初回の<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドの実行時に動作します。<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドや<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">reload</span></code>コマンドで強制的にプロビジョニングを実行する<code class="docutils literal notranslate"><span class="pre">--provision</span></code>オプションがあります。明示的にプロビジョニングを実行しないようにする<code class="docutils literal notranslate"><span class="pre">--no-provision</span></code>オプションがあります。常にプロビジョニングを実行する方法もあります。</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="provisioning-basic">
+<span id="id4"></span><h2>基本動作<a class="headerlink" href="#provisioning-basic" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>プロビジョニングを指定した Vagrantfile です。 Linux コマンドを実行するよう設定しました。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;, ip: &quot;192.168.10.1&quot;
+  config.vm.hostname = &quot;node1&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;sample-vm&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script
+end
+</pre></div>
+</div>
+<p>プロビジョニングの部分です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+SCRIPT
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>config.vm.provision &quot;shell&quot;, inline: $script
+</pre></div>
+</div>
+<p>仮想マシンが存在しない状態で<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>→<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">halt</span></code>→<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>→<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">halt</span></code>を実行した結果です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: sample-vm
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Remote connection disconnect. Retrying...
+    default: Warning: Connection aborted. Retrying...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==&gt; default: flag to force provisioning. Provisioners marked to run always will still run.
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<div class="section" id="vagrant-up">
+<h3><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> の実行結果からプロビジョニングの動作確認<a class="headerlink" href="#vagrant-up" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id5">
+<h4>初回<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>プロビジョニングが動作したことがわかります。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h4>2 回目<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>プロビジョニング済みなので &quot;Machine already provisioned.&quot; と表示されています。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==&gt; default: flag to force provisioning. Provisioners marked to run always will still run.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="provision">
+<h3>--provision オプション<a class="headerlink" href="#provision" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>2 回目の<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドの実行後に<code class="docutils literal notranslate"><span class="pre">--provision</span></code>オプションを指定して<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドを実行した結果です。プロビジョニングが動作しました。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up --provision
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>プロビジョニングの常時実行<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">run:</span> <span class="pre">&quot;always&quot;</span></code>を指定すると常にプロビジョニングが動作します。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;, ip: &quot;192.168.10.1&quot;
+  config.vm.hostname = &quot;node1&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;sample-vm&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script, run: &quot;always&quot;
+end
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==&gt; default: flag to force provisioning. Provisioners marked to run always will still run.
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="provisioning-shell">
+<span id="id8"></span><h2>シェル<a class="headerlink" href="#provisioning-shell" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="provisioning-shell-inline">
+<span id="id9"></span><h3>インラインスクリプト<a class="headerlink" href="#provisioning-shell-inline" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Vagrantfile 内にスクリプトを記述し、それを実行します。</p>
+<p>スクリプトと実行部分です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+echo hello, Vagrant world !
+SCRIPT
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>config.vm.provision &quot;shell&quot;, inline: $script
+</pre></div>
+</div>
+<p>$script 変数に設定した 1 つ以上のコマンドを順番に実行します。</p>
+<p>Vagrantfile の全体です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+echo hello, Vagrant world !
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;, ip: &quot;192.168.10.1&quot;
+  config.vm.hostname = &quot;node1&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;sample-vm&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script
+end
+</pre></div>
+</div>
+<p>実行結果です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: sample-vm
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+    default: hello, Vagrant world !
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<p>プロビジョニング部分を切り出した実行結果です。<code class="docutils literal notranslate"><span class="pre">echo</span></code>コマンドの実行結果が表示されています。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+    default: hello, Vagrant world !
+</pre></div>
+</div>
+<p>複数のスクリプトの実行もできます。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, world
+SCRIPT
+$script2 = &lt;&lt;-&#39;SCRIPT&#39;
+echo hello, Vagrant world !
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;, ip: &quot;192.168.10.1&quot;
+  config.vm.hostname = &quot;node1&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;sample-vm&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script
+  config.vm.provision &quot;shell&quot;, inline: $script2
+end
+</pre></div>
+</div>
+<p>実行結果です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: sample-vm
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection aborted. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, Vagrant world !
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<p>プロビジョニング部分の実行結果です。<code class="docutils literal notranslate"><span class="pre">config.vm.provision</span></code>が 2 回実行されています。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, world
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: hello, Vagrant world !
+</pre></div>
+</div>
+<p>nginx を使用した Web サーバーを構築する Vagrantfile です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+yum -y install epel-release
+yum -y install nginx
+systemctl start nginx
+systemctl enable nginx
+systemctl start firewalld
+firewall-cmd --add-service=http --permanent
+firewall-cmd --reload
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;
+  config.vm.hostname = &quot;web-sv&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;nginx&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script
+end
+</pre></div>
+</div>
+<p>実行結果です。</p>
+<p>code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: nginx
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection reset. Retrying...
+    default: Warning: Connection aborted. Retrying...
+    default: Warning: Remote connection disconnect. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: Loaded plugins: fastestmirror
+    default: Determining fastest mirrors
+    default:  * base: ftp.iij.ad.jp
+    default:  * extras: ftp.iij.ad.jp
+    default:  * updates: ftp.iij.ad.jp
+    default: Resolving Dependencies
+    default: --&gt; Running transaction check
+    default: ---&gt; Package epel-release.noarch 0:7-11 will be installed
+    default: --&gt; Finished Dependency Resolution
+    default:
+    default: Dependencies Resolved
+    default:
+    default: ================================================================================
+    default:  Package                Arch             Version         Repository        Size
+    default: ================================================================================
+    default: Installing:
+    default:  epel-release           noarch           7-11            extras            15 k
+    default:
+    default: Transaction Summary
+    default: ================================================================================
+    default: Install  1 Package
+    default: Total download size: 15 k
+    default: Installed size: 24 k
+    default: Downloading packages:
+    default: Public key for epel-release-7-11.noarch.rpm is not installed
+    default: warning: /var/cache/yum/x86_64/7/extras/packages/epel-release-7-11.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+    default: Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    default: Importing GPG key 0xF4A80EB5:
+    default:  Userid     : &quot;CentOS-7 Key (CentOS 7 Official Signing Key) &lt;security@centos.org&gt;&quot;
+    default:  Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+    default:  Package    : centos-release-7-6.1810.2.el7.centos.x86_64 (@anaconda)
+    default:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    default: Running transaction check
+    default: Running transaction test
+    default: Transaction test succeeded
+    default: Running transaction
+    default:   Installing : epel-release-7-11.noarch                                     1/1
+    default:
+    default:   Verifying  : epel-release-7-11.noarch                                     1/1
+    default:
+    default:
+    default: Installed:
+    default:   epel-release.noarch 0:7-11
+    default: Complete!
+    default: Loaded plugins: fastestmirror
+    default: Loading mirror speeds from cached hostfile
+    default:  * base: ftp.iij.ad.jp
+    default:  * epel: nrt.edge.kernel.org
+    default:  * extras: ftp.iij.ad.jp
+    default:  * updates: ftp.iij.ad.jp
+    default: Resolving Dependencies
+    default: --&gt; Running transaction check
+    default: ---&gt; Package nginx.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: nginx-all-modules = 1:1.16.1-1.el7 for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: nginx-filesystem = 1:1.16.1-1.el7 for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: nginx-filesystem for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: redhat-indexhtml for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: system-logos for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libprofiler.so.0()(64bit) for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Running transaction check
+    default: ---&gt; Package centos-indexhtml.noarch 0:7-9.el7.centos will be installed
+    default: ---&gt; Package centos-logos.noarch 0:70.0.6-3.el7.centos will be installed
+    default: ---&gt; Package gperftools-libs.x86_64 0:2.6.1-1.el7 will be installed
+    default: ---&gt; Package nginx-all-modules.noarch 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: nginx-mod-http-image-filter = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-http-perl = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-http-xslt-filter = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-mail = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-stream = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: ---&gt; Package nginx-filesystem.noarch 1:1.16.1-1.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package nginx-mod-http-image-filter.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: gd for package: 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libgd.so.2()(64bit) for package: 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64
+    default: ---&gt; Package nginx-mod-http-perl.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: perl &gt;= 5.006001 for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(:MODULE_COMPAT_5.16.3) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(Exporter) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(XSLoader) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(constant) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(strict) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(warnings) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libperl.so()(64bit) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: ---&gt; Package nginx-mod-http-xslt-filter.x86_64 1:1.16.1-1.el7 will be installed
+    default: ---&gt; Package nginx-mod-mail.x86_64 1:1.16.1-1.el7 will be installed
+    default: ---&gt; Package nginx-mod-stream.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package gd.x86_64 0:2.0.35-26.el7 will be installed
+    default: --&gt; Processing Dependency: libjpeg.so.62(LIBJPEG_6.2)(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libjpeg.so.62()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libfontconfig.so.1()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libXpm.so.4()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libX11.so.6()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: ---&gt; Package perl.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: --&gt; Processing Dependency: perl(Socket) &gt;= 1.3 for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Scalar::Util) &gt;= 1.10 for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl-macros for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(threads) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Getopt::Long) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Temp) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec::Unix) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec::Functions) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Path) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Cwd) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: ---&gt; Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+    default: ---&gt; Package perl-constant.noarch 0:1.27-2.el7 will be installed
+    default: ---&gt; Package perl-libs.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package fontconfig.x86_64 0:2.13.0-4.3.el7 will be installed
+    default: --&gt; Processing Dependency: fontpackages-filesystem for package: fontconfig-2.13.0-4.3.el7.x86_64
+    default: --&gt; Processing Dependency: dejavu-sans-fonts for package: fontconfig-2.13.0-4.3.el7.x86_64
+    default: ---&gt; Package libX11.x86_64 0:1.6.7-2.el7 will be installed
+    default: --&gt; Processing Dependency: libX11-common &gt;= 1.6.7-2.el7 for package: libX11-1.6.7-2.el7.x86_64
+    default: --&gt; Processing Dependency: libxcb.so.1()(64bit) for package: libX11-1.6.7-2.el7.x86_64
+    default: ---&gt; Package libXpm.x86_64 0:3.5.12-1.el7 will be installed
+    default: ---&gt; Package libjpeg-turbo.x86_64 0:1.2.90-8.el7 will be installed
+    default: ---&gt; Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+    default: ---&gt; Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+    default: ---&gt; Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+    default: ---&gt; Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+    default: ---&gt; Package perl-Getopt-Long.noarch 0:2.40-3.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Usage) &gt;= 1.14 for package: perl-Getopt-Long-2.40-3.el7.noarch
+    default: --&gt; Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-3.el7.noarch
+    default: ---&gt; Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+    default: ---&gt; Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Escapes) &gt;= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+    default: --&gt; Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+    default: ---&gt; Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+    default: ---&gt; Package perl-Socket.x86_64 0:2.010-4.el7 will be installed
+    default: ---&gt; Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+    default: ---&gt; Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+    default: ---&gt; Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+    default: ---&gt; Package perl-macros.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: ---&gt; Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+    default: ---&gt; Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package dejavu-sans-fonts.noarch 0:2.33-6.el7 will be installed
+    default: --&gt; Processing Dependency: dejavu-fonts-common = 2.33-6.el7 for package: dejavu-sans-fonts-2.33-6.el7.noarch
+    default: ---&gt; Package fontpackages-filesystem.noarch 0:1.44-8.el7 will be installed
+    default: ---&gt; Package libX11-common.noarch 0:1.6.7-2.el7 will be installed
+    default: ---&gt; Package libxcb.x86_64 0:1.13-1.el7 will be installed
+    default: --&gt; Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.13-1.el7.x86_64
+    default: ---&gt; Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+    default: ---&gt; Package perl-Pod-Escapes.noarch 1:1.04-294.el7_6 will be installed
+    default: ---&gt; Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Text) &gt;= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+    default: --&gt; Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+    default: ---&gt; Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package dejavu-fonts-common.noarch 0:2.33-6.el7 will be installed
+    default: ---&gt; Package libXau.x86_64 0:1.0.8-2.1.el7 will be installed
+    default: ---&gt; Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+    default: --&gt; Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+    default: --&gt; Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+    default: ---&gt; Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+    default: ---&gt; Package perl-parent.noarch 1:0.225-244.el7 will be installed
+    default: --&gt; Finished Dependency Resolution
+    default:
+    default: Dependencies Resolved
+    default:
+    default: ================================================================================
+    default:  Package                        Arch      Version                 Repository
+    default:                                                                            Size
+    default: ================================================================================
+    default: Installing:
+    default:  nginx                          x86_64    1:1.16.1-1.el7          epel    562 k
+    default: Installing for dependencies:
+    default:  centos-indexhtml               noarch    7-9.el7.centos          base     92 k
+    default:  centos-logos                   noarch    70.0.6-3.el7.centos     base     21 M
+    default:  dejavu-fonts-common            noarch    2.33-6.el7              base     64 k
+    default:  dejavu-sans-fonts              noarch    2.33-6.el7              base    1.4 M
+    default:  fontconfig                     x86_64    2.13.0-4.3.el7          base    254 k
+    default:  fontpackages-filesystem        noarch    1.44-8.el7              base    9.9 k
+    default:  gd                             x86_64    2.0.35-26.el7           base    146 k
+    default:  gperftools-libs                x86_64    2.6.1-1.el7             base    272 k
+    default:  libX11                         x86_64    1.6.7-2.el7             base    607 k
+    default:  libX11-common                  noarch    1.6.7-2.el7             base    164 k
+    default:  libXau                         x86_64    1.0.8-2.1.el7           base     29 k
+    default:  libXpm                         x86_64    3.5.12-1.el7            base     55 k
+    default:  libjpeg-turbo                  x86_64    1.2.90-8.el7            base    135 k
+    default:  libxcb                         x86_64    1.13-1.el7              base    214 k
+    default:  nginx-all-modules              noarch    1:1.16.1-1.el7          epel     19 k
+    default:  nginx-filesystem               noarch    1:1.16.1-1.el7          epel     21 k
+    default:  nginx-mod-http-image-filter    x86_64    1:1.16.1-1.el7          epel     30 k
+    default:  nginx-mod-http-perl            x86_64    1:1.16.1-1.el7          epel     39 k
+    default:  nginx-mod-http-xslt-filter     x86_64    1:1.16.1-1.el7          epel     29 k
+    default:  nginx-mod-mail                 x86_64    1:1.16.1-1.el7          epel     57 k
+    default:  nginx-mod-stream               x86_64    1:1.16.1-1.el7          epel     84 k
+    default:  perl                           x86_64    4:5.16.3-294.el7_6      base    8.0 M
+    default:  perl-Carp                      noarch    1.26-244.el7            base     19 k
+    default:  perl-Encode                    x86_64    2.51-7.el7              base    1.5 M
+    default:  perl-Exporter                  noarch    5.68-3.el7              base     28 k
+    default:  perl-File-Path                 noarch    2.09-2.el7              base     26 k
+    default:  perl-File-Temp                 noarch    0.23.01-3.el7           base     56 k
+    default:  perl-Filter                    x86_64    1.49-3.el7              base     76 k
+    default:  perl-Getopt-Long               noarch    2.40-3.el7              base     56 k
+    default:  perl-HTTP-Tiny                 noarch    0.033-3.el7             base     38 k
+    default:  perl-PathTools                 x86_64    3.40-5.el7              base     82 k
+    default:  perl-Pod-Escapes               noarch    1:1.04-294.el7_6        base     51 k
+    default:  perl-Pod-Perldoc               noarch    3.20-4.el7              base     87 k
+    default:  perl-Pod-Simple                noarch    1:3.28-4.el7            base    216 k
+    default:  perl-Pod-Usage                 noarch    1.63-3.el7              base     27 k
+    default:  perl-Scalar-List-Utils         x86_64    1.27-248.el7            base     36 k
+    default:  perl-Socket                    x86_64    2.010-4.el7             base     49 k
+    default:  perl-Storable                  x86_64    2.45-3.el7              base     77 k
+    default:  perl-Text-ParseWords           noarch    3.29-4.el7              base     14 k
+    default:  perl-Time-HiRes                x86_64    4:1.9725-3.el7          base     45 k
+    default:  perl-Time-Local                noarch    1.2300-2.el7            base     24 k
+    default:  perl-constant                  noarch    1.27-2.el7              base     19 k
+    default:  perl-libs                      x86_64    4:5.16.3-294.el7_6      base    688 k
+    default:  perl-macros                    x86_64    4:5.16.3-294.el7_6      base     44 k
+    default:  perl-parent                    noarch    1:0.225-244.el7         base     12 k
+    default:  perl-podlators                 noarch    2.5.1-3.el7             base    112 k
+    default:  perl-threads                   x86_64    1.87-4.el7              base     49 k
+    default:  perl-threads-shared            x86_64    1.43-6.el7              base     39 k
+    default:
+    default: Transaction Summary
+    default: ================================================================================
+    default: Install  1 Package (+48 Dependent packages)
+    default: Total download size: 37 M
+    default: Installed size: 72 M
+    default: Downloading packages:
+    default: warning: /var/cache/yum/x86_64/7/epel/packages/nginx-1.16.1-1.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 352c64e5: NOKEY
+    default: Public key for nginx-1.16.1-1.el7.x86_64.rpm is not installed
+    default: --------------------------------------------------------------------------------
+    default: Total                                               13 MB/s |  37 MB  00:02
+    default: Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    default: Importing GPG key 0x352C64E5:
+    default:  Userid     : &quot;Fedora EPEL (7) &lt;epel@fedoraproject.org&gt;&quot;
+    default:  Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+    default:  Package    : epel-release-7-11.noarch (@extras)
+    default:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    default: Running transaction check
+    default: Running transaction test
+    default: Transaction test succeeded
+    default: Running transaction
+    default:   Installing : fontpackages-filesystem-1.44-8.el7.noarch                   1/49
+    default:
+    default:   Installing : dejavu-fonts-common-2.33-6.el7.noarch                       2/49
+    default:
+    default:   Installing : dejavu-sans-fonts-2.33-6.el7.noarch                         3/49
+    default:
+    default:   Installing : fontconfig-2.13.0-4.3.el7.x86_64                            4/49
+    default:
+    default:   Installing : 1:perl-parent-0.225-244.el7.noarch                          5/49
+    default:
+    default:   Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                           6/49
+    default:
+    default:   Installing : perl-podlators-2.5.1-3.el7.noarch                           7/49
+    default:
+    default:   Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                          8/49
+    default:
+    default:   Installing : 1:perl-Pod-Escapes-1.04-294.el7_6.noarch                    9/49
+    default:
+    default:   Installing : perl-Encode-2.51-7.el7.x86_64                              10/49
+    default:
+    default:   Installing : perl-Text-ParseWords-3.29-4.el7.noarch                     11/49
+    default:
+    default:   Installing : perl-Pod-Usage-1.63-3.el7.noarch                           12/49
+    default:
+    default:   Installing : 4:perl-libs-5.16.3-294.el7_6.x86_64                        13/49
+    default:
+    default:   Installing : 4:perl-macros-5.16.3-294.el7_6.x86_64                      14/49
+    default:
+    default:   Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                      15/49
+    default:
+    default:   Installing : perl-Exporter-5.68-3.el7.noarch                            16/49
+    default:
+    default:   Installing : perl-constant-1.27-2.el7.noarch                            17/49
+    default:
+    default:   Installing : perl-Time-Local-1.2300-2.el7.noarch                        18/49
+    default:
+    default:   Installing : perl-Socket-2.010-4.el7.x86_64                             19/49
+    default:
+    default:   Installing : perl-Carp-1.26-244.el7.noarch                              20/49
+    default:
+    default:   Installing : perl-Storable-2.45-3.el7.x86_64                            21/49
+    default:
+    default:   Installing : perl-PathTools-3.40-5.el7.x86_64                           22/49
+    default:
+    default:   Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                 23/49
+    default:
+    default:   Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                        24/49
+    default:
+    default:   Installing : perl-File-Temp-0.23.01-3.el7.noarch                        25/49
+    default:
+    default:   Installing : perl-File-Path-2.09-2.el7.noarch                           26/49
+    default:
+    default:   Installing : perl-threads-shared-1.43-6.el7.x86_64                      27/49
+    default:
+    default:   Installing : perl-threads-1.87-4.el7.x86_64                             28/49
+    default:
+    default:   Installing : perl-Filter-1.49-3.el7.x86_64                              29/49
+    default:
+    default:   Installing : perl-Getopt-Long-2.40-3.el7.noarch                         30/49
+    default:
+    default:   Installing : 4:perl-5.16.3-294.el7_6.x86_64                             31/49
+    default:
+    default:   Installing : gperftools-libs-2.6.1-1.el7.x86_64                         32/49
+    default:
+    default:   Installing : libXau-1.0.8-2.1.el7.x86_64                                33/49
+    default:
+    default:   Installing : libxcb-1.13-1.el7.x86_64                                   34/49
+    default:
+    default:   Installing : centos-indexhtml-7-9.el7.centos.noarch                     35/49
+    default:
+    default:   Installing : libjpeg-turbo-1.2.90-8.el7.x86_64                          36/49
+    default:
+    default:   Installing : libX11-common-1.6.7-2.el7.noarch                           37/49
+    default:
+    default:   Installing : libX11-1.6.7-2.el7.x86_64                                  38/49
+    default:
+    default:   Installing : libXpm-3.5.12-1.el7.x86_64                                 39/49
+    default:
+    default:   Installing : gd-2.0.35-26.el7.x86_64                                    40/49
+    default:
+    default:   Installing : centos-logos-70.0.6-3.el7.centos.noarch                    41/49
+    default:
+    default:   Installing : 1:nginx-filesystem-1.16.1-1.el7.noarch                     42/49
+    default:
+    default:   Installing : 1:nginx-mod-mail-1.16.1-1.el7.x86_64                       43/49
+    default:
+    default:   Installing : 1:nginx-mod-stream-1.16.1-1.el7.x86_64                     44/49
+    default:
+    default:   Installing : 1:nginx-mod-http-xslt-filter-1.16.1-1.el7.x86_64           45/49
+    default:
+    default:   Installing : 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64          46/49
+    default:
+    default:   Installing : 1:nginx-1.16.1-1.el7.x86_64                                47/49
+    default:
+    default:   Installing : 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64                  48/49
+    default:
+    default:   Installing : 1:nginx-all-modules-1.16.1-1.el7.noarch                    49/49
+    default:
+    default:   Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                           1/49
+    default:
+    default:   Verifying  : fontconfig-2.13.0-4.3.el7.x86_64                            2/49
+    default:
+    default:   Verifying  : 1:nginx-filesystem-1.16.1-1.el7.noarch                      3/49
+    default:
+    default:   Verifying  : perl-threads-shared-1.43-6.el7.x86_64                       4/49
+    default:
+    default:   Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                       5/49
+    default:
+    default:   Verifying  : 1:perl-Pod-Escapes-1.04-294.el7_6.noarch                    6/49
+    default:
+    default:   Verifying  : perl-Exporter-5.68-3.el7.noarch                             7/49
+    default:
+    default:   Verifying  : perl-constant-1.27-2.el7.noarch                             8/49
+    default:
+    default:   Verifying  : perl-PathTools-3.40-5.el7.x86_64                            9/49
+    default:
+    default:   Verifying  : 1:nginx-mod-mail-1.16.1-1.el7.x86_64                       10/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64                  11/49
+    default:
+    default:   Verifying  : dejavu-fonts-common-2.33-6.el7.noarch                      12/49
+    default:
+    default:   Verifying  : fontpackages-filesystem-1.44-8.el7.noarch                  13/49
+    default:
+    default:   Verifying  : centos-logos-70.0.6-3.el7.centos.noarch                    14/49
+    default:
+    default:   Verifying  : 1:perl-parent-0.225-244.el7.noarch                         15/49
+    default:
+    default:   Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                           16/49
+    default:
+    default:   Verifying  : 4:perl-libs-5.16.3-294.el7_6.x86_64                        17/49
+    default:
+    default:   Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                        18/49
+    default:
+    default:   Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                        19/49
+    default:
+    default:   Verifying  : libX11-1.6.7-2.el7.x86_64                                  20/49
+    default:
+    default:   Verifying  : libX11-common-1.6.7-2.el7.noarch                           21/49
+    default:
+    default:   Verifying  : libxcb-1.13-1.el7.x86_64                                   22/49
+    default:
+    default:   Verifying  : perl-Time-Local-1.2300-2.el7.noarch                        23/49
+    default:
+    default:   Verifying  : 4:perl-macros-5.16.3-294.el7_6.x86_64                      24/49
+    default:
+    default:   Verifying  : perl-Socket-2.010-4.el7.x86_64                             25/49
+    default:
+    default:   Verifying  : libXpm-3.5.12-1.el7.x86_64                                 26/49
+    default:
+    default:   Verifying  : 1:nginx-mod-stream-1.16.1-1.el7.x86_64                     27/49
+    default:
+    default:   Verifying  : perl-Carp-1.26-244.el7.noarch                              28/49
+    default:
+    default:   Verifying  : perl-Storable-2.45-3.el7.x86_64                            29/49
+    default:
+    default:   Verifying  : dejavu-sans-fonts-2.33-6.el7.noarch                        30/49
+    default:
+    default:   Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64                 31/49
+    default:
+    default:   Verifying  : 1:nginx-1.16.1-1.el7.x86_64                                32/49
+    default:
+    default:   Verifying  : libjpeg-turbo-1.2.90-8.el7.x86_64                          33/49
+    default:
+    default:   Verifying  : 1:nginx-all-modules-1.16.1-1.el7.noarch                    34/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-xslt-filter-1.16.1-1.el7.x86_64           35/49
+    default:
+    default:   Verifying  : centos-indexhtml-7-9.el7.centos.noarch                     36/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64          37/49
+    default:
+    default:   Verifying  : perl-Encode-2.51-7.el7.x86_64                              38/49
+    default:
+    default:   Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                         39/49
+    default:
+    default:   Verifying  : perl-podlators-2.5.1-3.el7.noarch                          40/49
+    default:
+    default:   Verifying  : libXau-1.0.8-2.1.el7.x86_64                                41/49
+    default:
+    default:   Verifying  : perl-File-Path-2.09-2.el7.noarch                           42/49
+    default:
+    default:   Verifying  : perl-threads-1.87-4.el7.x86_64                             43/49
+    default:
+    default:   Verifying  : gperftools-libs-2.6.1-1.el7.x86_64                         44/49
+    default:
+    default:   Verifying  : perl-Filter-1.49-3.el7.x86_64                              45/49
+    default:
+    default:   Verifying  : perl-Getopt-Long-2.40-3.el7.noarch                         46/49
+    default:
+    default:   Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                     47/49
+    default:
+    default:   Verifying  : 4:perl-5.16.3-294.el7_6.x86_64                             48/49
+    default:
+    default:   Verifying  : gd-2.0.35-26.el7.x86_64                                    49/49
+    default:
+    default:
+    default: Installed:
+    default:   nginx.x86_64 1:1.16.1-1.el7
+    default:
+    default: Dependency Installed:
+    default:   centos-indexhtml.noarch 0:7-9.el7.centos
+    default:   centos-logos.noarch 0:70.0.6-3.el7.centos
+    default:   dejavu-fonts-common.noarch 0:2.33-6.el7
+    default:   dejavu-sans-fonts.noarch 0:2.33-6.el7
+    default:   fontconfig.x86_64 0:2.13.0-4.3.el7
+    default:   fontpackages-filesystem.noarch 0:1.44-8.el7
+    default:   gd.x86_64 0:2.0.35-26.el7
+    default:   gperftools-libs.x86_64 0:2.6.1-1.el7
+    default:   libX11.x86_64 0:1.6.7-2.el7
+    default:   libX11-common.noarch 0:1.6.7-2.el7
+    default:   libXau.x86_64 0:1.0.8-2.1.el7
+    default:   libXpm.x86_64 0:3.5.12-1.el7
+    default:   libjpeg-turbo.x86_64 0:1.2.90-8.el7
+    default:   libxcb.x86_64 0:1.13-1.el7
+    default:   nginx-all-modules.noarch 1:1.16.1-1.el7
+    default:   nginx-filesystem.noarch 1:1.16.1-1.el7
+    default:   nginx-mod-http-image-filter.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-http-perl.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-http-xslt-filter.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-mail.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-stream.x86_64 1:1.16.1-1.el7
+    default:   perl.x86_64 4:5.16.3-294.el7_6
+    default:   perl-Carp.noarch 0:1.26-244.el7
+    default:   perl-Encode.x86_64 0:2.51-7.el7
+    default:   perl-Exporter.noarch 0:5.68-3.el7
+    default:   perl-File-Path.noarch 0:2.09-2.el7
+    default:   perl-File-Temp.noarch 0:0.23.01-3.el7
+    default:   perl-Filter.x86_64 0:1.49-3.el7
+    default:   perl-Getopt-Long.noarch 0:2.40-3.el7
+    default:   perl-HTTP-Tiny.noarch 0:0.033-3.el7
+    default:   perl-PathTools.x86_64 0:3.40-5.el7
+    default:   perl-Pod-Escapes.noarch 1:1.04-294.el7_6
+    default:   perl-Pod-Perldoc.noarch 0:3.20-4.el7
+    default:   perl-Pod-Simple.noarch 1:3.28-4.el7
+    default:   perl-Pod-Usage.noarch 0:1.63-3.el7
+    default:   perl-Scalar-List-Utils.x86_64 0:1.27-248.el7
+    default:   perl-Socket.x86_64 0:2.010-4.el7
+    default:   perl-Storable.x86_64 0:2.45-3.el7
+    default:   perl-Text-ParseWords.noarch 0:3.29-4.el7
+    default:   perl-Time-HiRes.x86_64 4:1.9725-3.el7
+    default:   perl-Time-Local.noarch 0:1.2300-2.el7
+    default:   perl-constant.noarch 0:1.27-2.el7
+    default:   perl-libs.x86_64 4:5.16.3-294.el7_6
+    default:   perl-macros.x86_64 4:5.16.3-294.el7_6
+    default:   perl-parent.noarch 1:0.225-244.el7
+    default:   perl-podlators.noarch 0:2.5.1-3.el7
+    default:   perl-threads.x86_64 0:1.87-4.el7
+    default:   perl-threads-shared.x86_64 0:1.43-6.el7
+    default: Complete!
+    default: Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+    default: success
+    default: success
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="provisioning-shell-external">
+<span id="id10"></span><h3>エクスターナルスクリプト<a class="headerlink" href="#provisioning-shell-external" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Vagrantfile とは別のファイルにシェルを記述し、そのファイルを実行します。</p>
+<p>スクリプトと実行部分です。<code class="docutils literal notranslate"><span class="pre">path:</span></code>で実行するシェルスクリプトファイルを指定します。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; cat .\provision\nginx.sh
+yum -y install epel-release
+yum -y install nginx
+systemctl start nginx
+systemctl enable nginx
+systemctl start firewalld
+firewall-cmd --add-service=http --permanent
+firewall-cmd --reload
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>config.vm.provision &quot;shell&quot;, path: &quot;./provision/nginx.sh&quot;
+</pre></div>
+</div>
+<p>Vagrantfile の全体です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;
+  config.vm.hostname = &quot;web-sv&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;nginx&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, path: &quot;./provision/nginx.sh&quot;
+end
+</pre></div>
+</div>
+<p>実行結果です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: nginx
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: C:/Users/user/AppData/Local/Temp/vagrant-shell20200208-16956-1flu3hj.sh
+    default: Loaded plugins: fastestmirror
+    default: Determining fastest mirrors
+    default:  * base: ftp.iij.ad.jp
+    default:  * extras: ftp.iij.ad.jp
+    default:  * updates: ftp.iij.ad.jp
+    default: Resolving Dependencies
+    default: --&gt; Running transaction check
+    default: ---&gt; Package epel-release.noarch 0:7-11 will be installed
+    default: --&gt; Finished Dependency Resolution
+    default:
+    default: Dependencies Resolved
+    default:
+    default: ================================================================================
+    default:  Package                Arch             Version         Repository        Size
+    default: ================================================================================
+    default: Installing:
+    default:  epel-release           noarch           7-11            extras            15 k
+    default:
+    default: Transaction Summary
+    default: ================================================================================
+    default: Install  1 Package
+    default:
+    default: Total download size: 15 k
+    default: Installed size: 24 k
+    default: Downloading packages:
+    default: Public key for epel-release-7-11.noarch.rpm is not installed
+    default: warning: /var/cache/yum/x86_64/7/extras/packages/epel-release-7-11.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+    default: Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    default: Importing GPG key 0xF4A80EB5:
+    default:  Userid     : &quot;CentOS-7 Key (CentOS 7 Official Signing Key) &lt;security@centos.org&gt;&quot;
+    default:  Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+    default:  Package    : centos-release-7-6.1810.2.el7.centos.x86_64 (@anaconda)
+    default:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    default: Running transaction check
+    default: Running transaction test
+    default: Transaction test succeeded
+    default: Running transaction
+    default:   Installing : epel-release-7-11.noarch                                     1/1
+    default:
+    default:   Verifying  : epel-release-7-11.noarch                                     1/1
+    default:
+    default:
+    default: Installed:
+    default:   epel-release.noarch 0:7-11
+    default: Complete!
+    default: Loaded plugins: fastestmirror
+    default: Loading mirror speeds from cached hostfile
+    default:  * base: ftp.iij.ad.jp
+    default:  * epel: ftp.iij.ad.jp
+    default:  * extras: ftp.iij.ad.jp
+    default:  * updates: ftp.iij.ad.jp
+    default: Resolving Dependencies
+    default: --&gt; Running transaction check
+    default: ---&gt; Package nginx.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: nginx-all-modules = 1:1.16.1-1.el7 for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: nginx-filesystem = 1:1.16.1-1.el7 for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: nginx-filesystem for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: redhat-indexhtml for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: system-logos for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libprofiler.so.0()(64bit) for package: 1:nginx-1.16.1-1.el7.x86_64
+    default: --&gt; Running transaction check
+    default: ---&gt; Package centos-indexhtml.noarch 0:7-9.el7.centos will be installed
+    default: ---&gt; Package centos-logos.noarch 0:70.0.6-3.el7.centos will be installed
+    default: ---&gt; Package gperftools-libs.x86_64 0:2.6.1-1.el7 will be installed
+    default: ---&gt; Package nginx-all-modules.noarch 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: nginx-mod-http-image-filter = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-http-perl = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-http-xslt-filter = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-mail = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: --&gt; Processing Dependency: nginx-mod-stream = 1:1.16.1-1.el7 for package: 1:nginx-all-modules-1.16.1-1.el7.noarch
+    default: ---&gt; Package nginx-filesystem.noarch 1:1.16.1-1.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package nginx-mod-http-image-filter.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: gd for package: 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libgd.so.2()(64bit) for package: 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64
+    default: ---&gt; Package nginx-mod-http-perl.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Processing Dependency: perl &gt;= 5.006001 for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(:MODULE_COMPAT_5.16.3) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(Exporter) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(XSLoader) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(constant) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(strict) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: perl(warnings) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: --&gt; Processing Dependency: libperl.so()(64bit) for package: 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64
+    default: ---&gt; Package nginx-mod-http-xslt-filter.x86_64 1:1.16.1-1.el7 will be installed
+    default: ---&gt; Package nginx-mod-mail.x86_64 1:1.16.1-1.el7 will be installed
+    default: ---&gt; Package nginx-mod-stream.x86_64 1:1.16.1-1.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package gd.x86_64 0:2.0.35-26.el7 will be installed
+    default: --&gt; Processing Dependency: libjpeg.so.62(LIBJPEG_6.2)(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libjpeg.so.62()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libfontconfig.so.1()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libXpm.so.4()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: --&gt; Processing Dependency: libX11.so.6()(64bit) for package: gd-2.0.35-26.el7.x86_64
+    default: ---&gt; Package perl.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: --&gt; Processing Dependency: perl(Socket) &gt;= 1.3 for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Scalar::Util) &gt;= 1.10 for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl-macros for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(threads) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Getopt::Long) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Temp) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec::Unix) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec::Functions) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Spec) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(File::Path) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Cwd) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: --&gt; Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-294.el7_6.x86_64
+    default: ---&gt; Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+    default: ---&gt; Package perl-constant.noarch 0:1.27-2.el7 will be installed
+    default: ---&gt; Package perl-libs.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package fontconfig.x86_64 0:2.13.0-4.3.el7 will be installed
+    default: --&gt; Processing Dependency: fontpackages-filesystem for package: fontconfig-2.13.0-4.3.el7.x86_64
+    default: --&gt; Processing Dependency: dejavu-sans-fonts for package: fontconfig-2.13.0-4.3.el7.x86_64
+    default: ---&gt; Package libX11.x86_64 0:1.6.7-2.el7 will be installed
+    default: --&gt; Processing Dependency: libX11-common &gt;= 1.6.7-2.el7 for package: libX11-1.6.7-2.el7.x86_64
+    default: --&gt; Processing Dependency: libxcb.so.1()(64bit) for package: libX11-1.6.7-2.el7.x86_64
+    default: ---&gt; Package libXpm.x86_64 0:3.5.12-1.el7 will be installed
+    default: ---&gt; Package libjpeg-turbo.x86_64 0:1.2.90-8.el7 will be installed
+    default: ---&gt; Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+    default: ---&gt; Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+    default: ---&gt; Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+    default: ---&gt; Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+    default: ---&gt; Package perl-Getopt-Long.noarch 0:2.40-3.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Usage) &gt;= 1.14 for package: perl-Getopt-Long-2.40-3.el7.noarch
+    default: --&gt; Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-3.el7.noarch
+    default: ---&gt; Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+    default: ---&gt; Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Escapes) &gt;= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+    default: --&gt; Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+    default: ---&gt; Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+    default: ---&gt; Package perl-Socket.x86_64 0:2.010-4.el7 will be installed
+    default: ---&gt; Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+    default: ---&gt; Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+    default: ---&gt; Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+    default: ---&gt; Package perl-macros.x86_64 4:5.16.3-294.el7_6 will be installed
+    default: ---&gt; Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+    default: ---&gt; Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package dejavu-sans-fonts.noarch 0:2.33-6.el7 will be installed
+    default: --&gt; Processing Dependency: dejavu-fonts-common = 2.33-6.el7 for package: dejavu-sans-fonts-2.33-6.el7.noarch
+    default: ---&gt; Package fontpackages-filesystem.noarch 0:1.44-8.el7 will be installed
+    default: ---&gt; Package libX11-common.noarch 0:1.6.7-2.el7 will be installed
+    default: ---&gt; Package libxcb.x86_64 0:1.13-1.el7 will be installed
+    default: --&gt; Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.13-1.el7.x86_64
+    default: ---&gt; Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+    default: ---&gt; Package perl-Pod-Escapes.noarch 1:1.04-294.el7_6 will be installed
+    default: ---&gt; Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+    default: --&gt; Processing Dependency: perl(Pod::Text) &gt;= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+    default: --&gt; Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+    default: ---&gt; Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package dejavu-fonts-common.noarch 0:2.33-6.el7 will be installed
+    default: ---&gt; Package libXau.x86_64 0:1.0.8-2.1.el7 will be installed
+    default: ---&gt; Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+    default: --&gt; Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+    default: --&gt; Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+    default: ---&gt; Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+    default: --&gt; Running transaction check
+    default: ---&gt; Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+    default: ---&gt; Package perl-parent.noarch 1:0.225-244.el7 will be installed
+    default: --&gt; Finished Dependency Resolution
+    default:
+    default: Dependencies Resolved
+    default:
+    default: ================================================================================
+    default:  Package                        Arch      Version                 Repository
+    default:                                                                            Size
+    default: ================================================================================
+    default: Installing:
+    default:  nginx                          x86_64    1:1.16.1-1.el7          epel    562 k
+    default: Installing for dependencies:
+    default:  centos-indexhtml               noarch    7-9.el7.centos          base     92 k
+    default:  centos-logos                   noarch    70.0.6-3.el7.centos     base     21 M
+    default:  dejavu-fonts-common            noarch    2.33-6.el7              base     64 k
+    default:  dejavu-sans-fonts              noarch    2.33-6.el7              base    1.4 M
+    default:  fontconfig                     x86_64    2.13.0-4.3.el7          base    254 k
+    default:  fontpackages-filesystem        noarch    1.44-8.el7              base    9.9 k
+    default:  gd                             x86_64    2.0.35-26.el7           base    146 k
+    default:  gperftools-libs                x86_64    2.6.1-1.el7             base    272 k
+    default:  libX11                         x86_64    1.6.7-2.el7             base    607 k
+    default:  libX11-common                  noarch    1.6.7-2.el7             base    164 k
+    default:  libXau                         x86_64    1.0.8-2.1.el7           base     29 k
+    default:  libXpm                         x86_64    3.5.12-1.el7            base     55 k
+    default:  libjpeg-turbo                  x86_64    1.2.90-8.el7            base    135 k
+    default:  libxcb                         x86_64    1.13-1.el7              base    214 k
+    default:  nginx-all-modules              noarch    1:1.16.1-1.el7          epel     19 k
+    default:  nginx-filesystem               noarch    1:1.16.1-1.el7          epel     21 k
+    default:  nginx-mod-http-image-filter    x86_64    1:1.16.1-1.el7          epel     30 k
+    default:  nginx-mod-http-perl            x86_64    1:1.16.1-1.el7          epel     39 k
+    default:  nginx-mod-http-xslt-filter     x86_64    1:1.16.1-1.el7          epel     29 k
+    default:  nginx-mod-mail                 x86_64    1:1.16.1-1.el7          epel     57 k
+    default:  nginx-mod-stream               x86_64    1:1.16.1-1.el7          epel     84 k
+    default:  perl                           x86_64    4:5.16.3-294.el7_6      base    8.0 M
+    default:  perl-Carp                      noarch    1.26-244.el7            base     19 k
+    default:  perl-Encode                    x86_64    2.51-7.el7              base    1.5 M
+    default:  perl-Exporter                  noarch    5.68-3.el7              base     28 k
+    default:  perl-File-Path                 noarch    2.09-2.el7              base     26 k
+    default:  perl-File-Temp                 noarch    0.23.01-3.el7           base     56 k
+    default:  perl-Filter                    x86_64    1.49-3.el7              base     76 k
+    default:  perl-Getopt-Long               noarch    2.40-3.el7              base     56 k
+    default:  perl-HTTP-Tiny                 noarch    0.033-3.el7             base     38 k
+    default:  perl-PathTools                 x86_64    3.40-5.el7              base     82 k
+    default:  perl-Pod-Escapes               noarch    1:1.04-294.el7_6        base     51 k
+    default:  perl-Pod-Perldoc               noarch    3.20-4.el7              base     87 k
+    default:  perl-Pod-Simple                noarch    1:3.28-4.el7            base    216 k
+    default:  perl-Pod-Usage                 noarch    1.63-3.el7              base     27 k
+    default:  perl-Scalar-List-Utils         x86_64    1.27-248.el7            base     36 k
+    default:  perl-Socket                    x86_64    2.010-4.el7             base     49 k
+    default:  perl-Storable                  x86_64    2.45-3.el7              base     77 k
+    default:  perl-Text-ParseWords           noarch    3.29-4.el7              base     14 k
+    default:  perl-Time-HiRes                x86_64    4:1.9725-3.el7          base     45 k
+    default:  perl-Time-Local                noarch    1.2300-2.el7            base     24 k
+    default:  perl-constant                  noarch    1.27-2.el7              base     19 k
+    default:  perl-libs                      x86_64    4:5.16.3-294.el7_6      base    688 k
+    default:  perl-macros                    x86_64    4:5.16.3-294.el7_6      base     44 k
+    default:  perl-parent                    noarch    1:0.225-244.el7         base     12 k
+    default:  perl-podlators                 noarch    2.5.1-3.el7
+    default:            base    112 k
+    default:  perl-threads                   x86_64    1.87-4.el7              base     49 k
+    default:  perl-threads-shared            x86_64    1.43-6.el7              base     39 k
+    default:
+    default: Transaction Summary
+    default: ================================================================================
+    default: Install  1 Package (+48 Dependent packages)
+    default: Total download size: 37 M
+    default: Installed size: 72 M
+    default: Downloading packages:
+    default: Public key for nginx-all-modules-1.16.1-1.el7.noarch.rpm is not installed
+    default: warning: /var/cache/yum/x86_64/7/epel/packages/nginx-all-modules-1.16.1-1.el7.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID 352c64e5: NOKEY
+    default: --------------------------------------------------------------------------------
+    default: Total                                              9.7 MB/s |  37 MB  00:03
+    default: Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    default: Importing GPG key 0x352C64E5:
+    default:  Userid     : &quot;Fedora EPEL (7) &lt;epel@fedoraproject.org&gt;&quot;
+    default:  Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+    default:  Package    : epel-release-7-11.noarch (@extras)
+    default:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    default: Running transaction check
+    default: Running transaction test
+    default: Transaction test succeeded
+    default: Running transaction
+    default:   Installing : fontpackages-filesystem-1.44-8.el7.noarch                   1/49
+    default:
+    default:   Installing : dejavu-fonts-common-2.33-6.el7.noarch                       2/49
+    default:
+    default:   Installing : dejavu-sans-fonts-2.33-6.el7.noarch                         3/49
+    default:
+    default:   Installing : fontconfig-2.13.0-4.3.el7.x86_64                            4/49
+    default:
+    default:   Installing : 1:perl-parent-0.225-244.el7.noarch                          5/49
+    default:
+    default:   Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                           6/49
+    default:
+    default:   Installing : perl-podlators-2.5.1-3.el7.noarch                           7/49
+    default:
+    default:   Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                          8/49
+    default:
+    default:   Installing : 1:perl-Pod-Escapes-1.04-294.el7_6.noarch                    9/49
+    default:
+    default:   Installing : perl-Encode-2.51-7.el7.x86_64                              10/49
+    default:
+    default:   Installing : perl-Text-ParseWords-3.29-4.el7.noarch                     11/49
+    default:
+    default:   Installing : perl-Pod-Usage-1.63-3.el7.noarch                           12/49
+    default:
+    default:   Installing : 4:perl-libs-5.16.3-294.el7_6.x86_64                        13/49
+    default:
+    default:   Installing : 4:perl-macros-5.16.3-294.el7_6.x86_64                      14/49
+    default:
+    default:   Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                      15/49
+    default:
+    default:   Installing : perl-Exporter-5.68-3.el7.noarch                            16/49
+    default:
+    default:   Installing : perl-constant-1.27-2.el7.noarch                            17/49
+    default:
+    default:   Installing : perl-Time-Local-1.2300-2.el7.noarch                        18/49
+    default:
+    default:   Installing : perl-Socket-2.010-4.el7.x86_64                             19/49
+    default:
+    default:   Installing : perl-Carp-1.26-244.el7.noarch                              20/49
+    default:
+    default:   Installing : perl-Storable-2.45-3.el7.x86_64                            21/49
+    default:
+    default:   Installing : perl-PathTools-3.40-5.el7.x86_64                           22/49
+    default:
+    default:   Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                 23/49
+    default:
+    default:   Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                        24/49
+    default:
+    default:   Installing : perl-File-Temp-0.23.01-3.el7.noarch                        25/49
+    default:
+    default:   Installing : perl-File-Path-2.09-2.el7.noarch                           26/49
+    default:
+    default:   Installing : perl-threads-shared-1.43-6.el7.x86_64                      27/49
+    default:
+    default:   Installing : perl-threads-1.87-4.el7.x86_64                             28/49
+    default:
+    default:   Installing : perl-Filter-1.49-3.el7.x86_64                              29/49
+    default:
+    default:   Installing : perl-Getopt-Long-2.40-3.el7.noarch                         30/49
+    default:
+    default:   Installing : 4:perl-5.16.3-294.el7_6.x86_64                             31/49
+    default:
+    default:   Installing : gperftools-libs-2.6.1-1.el7.x86_64                         32/49
+    default:
+    default:   Installing : libXau-1.0.8-2.1.el7.x86_64                                33/49
+    default:
+    default:   Installing : libxcb-1.13-1.el7.x86_64                                   34/49
+    default:
+    default:   Installing : centos-indexhtml-7-9.el7.centos.noarch                     35/49
+    default:
+    default:   Installing : libjpeg-turbo-1.2.90-8.el7.x86_64                          36/49
+    default:
+    default:   Installing : libX11-common-1.6.7-2.el7.noarch                           37/49
+    default:
+    default:   Installing : libX11-1.6.7-2.el7.x86_64                                  38/49
+    default:
+    default:   Installing : libXpm-3.5.12-1.el7.x86_64                                 39/49
+    default:
+    default:   Installing : gd-2.0.35-26.el7.x86_64                                    40/49
+    default:
+    default:   Installing : centos-logos-70.0.6-3.el7.centos.noarch                    41/49
+    default:
+    default:   Installing : 1:nginx-filesystem-1.16.1-1.el7.noarch                     42/49
+    default:
+    default:   Installing : 1:nginx-mod-mail-1.16.1-1.el7.x86_64                       43/49
+    default:
+    default:   Installing : 1:nginx-mod-stream-1.16.1-1.el7.x86_64                     44/49
+    default:
+    default:   Installing : 1:nginx-mod-http-xslt-filter-1.16.1-1.el7.x86_64           45/49
+    default:
+    default:   Installing : 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64          46/49
+    default:
+    default:   Installing : 1:nginx-1.16.1-1.el7.x86_64                                47/49
+    default:
+    default:   Installing : 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64                  48/49
+    default:
+    default:   Installing : 1:nginx-all-modules-1.16.1-1.el7.noarch                    49/49
+    default:
+    default:   Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                           1/49
+    default:
+    default:   Verifying  : fontconfig-2.13.0-4.3.el7.x86_64                            2/49
+    default:
+    default:   Verifying  : 1:nginx-filesystem-1.16.1-1.el7.noarch                      3/49
+    default:
+    default:   Verifying  : perl-threads-shared-1.43-6.el7.x86_64                       4/49
+    default:
+    default:   Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                       5/49
+    default:
+    default:   Verifying  : 1:perl-Pod-Escapes-1.04-294.el7_6.noarch                    6/49
+    default:
+    default:   Verifying  : perl-Exporter-5.68-3.el7.noarch                             7/49
+    default:
+    default:   Verifying  : perl-constant-1.27-2.el7.noarch                             8/49
+    default:
+    default:   Verifying  : perl-PathTools-3.40-5.el7.x86_64                            9/49
+    default:
+    default:   Verifying  : 1:nginx-mod-mail-1.16.1-1.el7.x86_64                       10/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-perl-1.16.1-1.el7.x86_64                  11/49
+    default:
+    default:   Verifying  : dejavu-fonts-common-2.33-6.el7.noarch                      12/49
+    default:
+    default:   Verifying  : fontpackages-filesystem-1.44-8.el7.noarch                  13/49
+    default:
+    default:   Verifying  : centos-logos-70.0.6-3.el7.centos.noarch                    14/49
+    default:
+    default:   Verifying  : 1:perl-parent-0.225-244.el7.noarch                         15/49
+    default:
+    default:   Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                           16/49
+    default:
+    default:   Verifying  : 4:perl-libs-5.16.3-294.el7_6.x86_64                        17/49
+    default:
+    default:   Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                        18/49
+    default:
+    default:   Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                        19/49
+    default:
+    default:   Verifying  : libX11-1.6.7-2.el7.x86_64                                  20/49
+    default:
+    default:   Verifying  : libX11-common-1.6.7-2.el7.noarch                           21/49
+    default:
+    default:   Verifying  : libxcb-1.13-1.el7.x86_64                                   22/49
+    default:
+    default:   Verifying  : perl-Time-Local-1.2300-2.el7.noarch                        23/49
+    default:
+    default:   Verifying  : 4:perl-macros-5.16.3-294.el7_6.x86_64                      24/49
+    default:
+    default:   Verifying  : perl-Socket-2.010-4.el7.x86_64                             25/49
+    default:
+    default:   Verifying  : libXpm-3.5.12-1.el7.x86_64                                 26/49
+    default:
+    default:   Verifying  : 1:nginx-mod-stream-1.16.1-1.el7.x86_64                     27/49
+    default:
+    default:   Verifying  : perl-Carp-1.26-244.el7.noarch                              28/49
+    default:
+    default:   Verifying  : perl-Storable-2.45-3.el7.x86_64                            29/49
+    default:
+    default:   Verifying  : dejavu-sans-fonts-2.33-6.el7.noarch                        30/49
+    default:
+    default:   Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64                 31/49
+    default:
+    default:   Verifying  : 1:nginx-1.16.1-1.el7.x86_64                                32/49
+    default:
+    default:   Verifying  : libjpeg-turbo-1.2.90-8.el7.x86_64                          33/49
+    default:
+    default:   Verifying  : 1:nginx-all-modules-1.16.1-1.el7.noarch                    34/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-xslt-filter-1.16.1-1.el7.x86_64           35/49
+    default:
+    default:   Verifying  : centos-indexhtml-7-9.el7.centos.noarch                     36/49
+    default:
+    default:   Verifying  : 1:nginx-mod-http-image-filter-1.16.1-1.el7.x86_64          37/49
+    default:
+    default:   Verifying  : perl-Encode-2.51-7.el7.x86_64                              38/49
+    default:
+    default:   Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                         39/49
+    default:
+    default:   Verifying  : perl-podlators-2.5.1-3.el7.noarch                          40/49
+    default:
+    default:   Verifying  : libXau-1.0.8-2.1.el7.x86_64                                41/49
+    default:
+    default:   Verifying  : perl-File-Path-2.09-2.el7.noarch                           42/49
+    default:
+    default:   Verifying  : perl-threads-1.87-4.el7.x86_64                             43/49
+    default:
+    default:   Verifying  : gperftools-libs-2.6.1-1.el7.x86_64                         44/49
+    default:
+    default:   Verifying  : perl-Filter-1.49-3.el7.x86_64                              45/49
+    default:
+    default:   Verifying  : perl-Getopt-Long-2.40-3.el7.noarch                         46/49
+    default:
+    default:   Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                     47/49
+    default:
+    default:   Verifying  : 4:perl-5.16.3-294.el7_6.x86_64                             48/49
+    default:
+    default:   Verifying  : gd-2.0.35-26.el7.x86_64                                    49/49
+    default:
+    default:
+    default: Installed:
+    default:   nginx.x86_64 1:1.16.1-1.el7
+    default:
+    default: Dependency Installed:
+    default:   centos-indexhtml.noarch 0:7-9.el7.centos
+    default:   centos-logos.noarch 0:70.0.6-3.el7.centos
+    default:   dejavu-fonts-common.noarch 0:2.33-6.el7
+    default:   dejavu-sans-fonts.noarch 0:2.33-6.el7
+    default:   fontconfig.x86_64 0:2.13.0-4.3.el7
+    default:   fontpackages-filesystem.noarch 0:1.44-8.el7
+    default:   gd.x86_64 0:2.0.35-26.el7
+    default:   gperftools-libs.x86_64 0:2.6.1-1.el7
+    default:   libX11.x86_64 0:1.6.7-2.el7
+    default:   libX11-common.noarch 0:1.6.7-2.el7
+    default:   libXau.x86_64 0:1.0.8-2.1.el7
+    default:   libXpm.x86_64 0:3.5.12-1.el7
+    default:   libjpeg-turbo.x86_64 0:1.2.90-8.el7
+    default:   libxcb.x86_64 0:1.13-1.el7
+    default:   nginx-all-modules.noarch 1:1.16.1-1.el7
+    default:   nginx-filesystem.noarch 1:1.16.1-1.el7
+    default:   nginx-mod-http-image-filter.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-http-perl.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-http-xslt-filter.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-mail.x86_64 1:1.16.1-1.el7
+    default:   nginx-mod-stream.x86_64 1:1.16.1-1.el7
+    default:   perl.x86_64 4:5.16.3-294.el7_6
+    default:   perl-Carp.noarch 0:1.26-244.el7
+    default:   perl-Encode.x86_64 0:2.51-7.el7
+    default:   perl-Exporter.noarch 0:5.68-3.el7
+    default:   perl-File-Path.noarch 0:2.09-2.el7
+    default:   perl-File-Temp.noarch 0:0.23.01-3.el7
+    default:   perl-Filter.x86_64 0:1.49-3.el7
+    default:   perl-Getopt-Long.noarch 0:2.40-3.el7
+    default:   perl-HTTP-Tiny.noarch 0:0.033-3.el7
+    default:   perl-PathTools.x86_64 0:3.40-5.el7
+    default:   perl-Pod-Escapes.noarch 1:1.04-294.el7_6
+    default:   perl-Pod-Perldoc.noarch 0:3.20-4.el7
+    default:   perl-Pod-Simple.noarch 1:3.28-4.el7
+    default:   perl-Pod-Usage.noarch 0:1.63-3.el7
+    default:   perl-Scalar-List-Utils.x86_64 0:1.27-248.el7
+    default:   perl-Socket.x86_64 0:2.010-4.el7
+    default:   perl-Storable.x86_64 0:2.45-3.el7
+    default:   perl-Text-ParseWords.noarch 0:3.29-4.el7
+    default:   perl-Time-HiRes.x86_64 4:1.9725-3.el7
+    default:   perl-Time-Local.noarch 0:1.2300-2.el7
+    default:   perl-constant.noarch 0:1.27-2.el7
+    default:   perl-libs.x86_64 4:5.16.3-294.el7_6
+    default:   perl-macros.x86_64 4:5.16.3-294.el7_6
+    default:   perl-parent.noarch 1:0.225-244.el7
+    default:   perl-podlators.noarch 0:2.5.1-3.el7
+    default:   perl-threads.x86_64 0:1.87-4.el7
+    default:   perl-threads-shared.x86_64 0:1.43-6.el7
+    default:
+    default: Complete!
+    default: Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+    default: success
+    default: success
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="ansible">
+<span id="provisioning-ansible"></span><h2>Ansible<a class="headerlink" href="#ansible" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansible を使用してプロビジョニングします。<a class="reference internal" href="#provisioning-shell-external"><span class="std std-ref">エクスターナルスクリプト</span></a>と同様に Vagrantfile とは別にプレイブックファイルを用意します。</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>プロビジョニング対象の仮想マシンに Ansible がインストールされていないときは自動でインストールされます。</p>
+</div>
+<p>プレイブックファイルと実行部分です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; cat .\provision\nginx.yml
+---
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: install Nginx
+    yum:
+      name: nginx
+      state: latest
+    notify:
+    - nginx restart
+  - name: firewalld start
+    systemd:
+      name: firewalld
+      enabled: yes
+      state: started
+  - name: firewalld enable http
+    firewalld:
+      service: http
+      immediate: yes
+      permanent: yes
+      state: enabled
+  handlers:
+  - name: nginx service restarted
+    systemd:
+      name: nginx
+      enabled: yes
+      state: restarted
+    listen:
+    - nginx restart
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>config.vm.provision &quot;ansible_local&quot; do |ansible|
+  ansible.playbook = &quot;./provision/nginx.yml&quot;
+end
+</pre></div>
+</div>
+<p>Vagrantfile の全体です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;080027000001&quot;
+  config.vm.hostname = &quot;web-sv&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;nginx&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;ansible_local&quot; do |ansible|
+    ansible.playbook = &quot;./provision/nginx.yml&quot;
+  end
+end
+</pre></div>
+</div>
+<p>実行結果です。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up                                                                                   Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: nginx
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: ansible_local...
+    default: Installing Ansible...
+Vagrant has automatically selected the compatibility mode &#39;2.0&#39;
+according to the Ansible version installed (2.9.3).
+
+Alternatively, the compatibility mode can be specified in your Vagrantfile:
+https://www.vagrantup.com/docs/provisioning/ansible_common.html#compatibility_mode
+    default: Running ansible-playbook...
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [default]
+
+TASK [install Nginx] ***********************************************************
+changed: [default]
+
+TASK [firewalld start] *********************************************************
+changed: [default]
+
+TASK [firewalld enable http] ***************************************************
+changed: [default]
+
+RUNNING HANDLER [nginx service restarted] **************************************
+changed: [default]
+
+PLAY RECAP *********************************************************************
+default                    : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../package/package.html" class="btn btn-neutral float-right" title="BOX ファイルの作成" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../vagrantfile/vagrantfile.html" class="btn btn-neutral float-left" title="Vagrantfile の編集" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Yoichi Muraoka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

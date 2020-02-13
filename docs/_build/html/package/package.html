@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BOX ファイルの作成 &mdash; Windows 10 で Vagrant を使う 2020/02/13 23:16 更新 ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="複数の仮想マシンの操作" href="../multi/multi.html" />
+    <link rel="prev" title="プロビジョニング" href="../provisioning/provisioning.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Windows 10 で Vagrant を使う
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Last update on 02/13/2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../environment/environment.html">環境構築</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-virtualbox">Oracle VirtualBox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-virtualbox-install">インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../environment/environment.html#environment-vagrant">Vagrant</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-download">ダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../environment/environment.html#environment-vagrant-install">インストール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../words/words.html">用語</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#word-provider">プロバイダ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#word-provisioning">プロビジョニング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#box">Box ファイル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#vagrantfile">Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../words/words.html#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../command/command.html">主な Vagrant コマンド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-about">コマンドとフォルダ／ファイルの関係図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../command/command.html#command-list">コマンドリスト</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#box">Box ファイルの操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../command/command.html#command-list-vms">仮想マシンの操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/help.html">ヘルプ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../walkthrough/walkthrough.html">ウォークスルー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrant">Vagrant 用のフォルダーを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#box">Box ファイルをダウンロード</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#vagrantfile">Vagrantfile を作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-up">仮想マシンを起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-ssh">仮想マシンに接続</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-reload">仮想マシンを再起動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-halt">仮想マシンを停止（シャットダウン）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-suspend">仮想マシンをサスペンド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-resume">仮想マシンをリジューム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-status">仮想マシンの状態を表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-destroy">仮想マシンを削除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../walkthrough/walkthrough.html#walkthrough-remove">Box ファイルを削除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vms/vms.html">デフォルトの仮想マシンの仕様</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-hw">仮想マシン自体の仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vms/vms.html#vms-sw">仮想マシンの仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id4">デフォルトアカウント</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vms/vms.html#id5">公開鍵認証</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vagrantfile/vagrantfile.html">Vagrantfile の編集</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-orignal">オリジナルの Vagrantfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-struct">Vagrantfile の構造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-parameter">主なパラメーター</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-box">config.vm.box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-hostname">config.vm.hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#config-vm-network">config.vm.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-name">vb.name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-gui">vb.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-memory">vb.memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-cpu">vb.cpu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vb-customize">vb.customize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vagrantfile/vagrantfile.html#vagrant-sample">Vagrantfile の設定例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../provisioning/provisioning.html">プロビジョニング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-about">プロビジョニングとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-timing">実行タイミング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-basic">基本動作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#vagrant-up"><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> の実行結果からプロビジョニングの動作確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provision">--provision オプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#id7">プロビジョニングの常時実行</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell">シェル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell-inline">インラインスクリプト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../provisioning/provisioning.html#provisioning-shell-external">エクスターナルスクリプト</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/provisioning.html#ansible">Ansible</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BOX ファイルの作成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#package-base">Box ファイルの元になる仮想マシンの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-create">Box ファイルの作成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-create-options">主なオプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-create-use">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#package-use">作成した Box ファイルの使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-use-list">Box ファイルの登録</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-use-exec">Box ファイルを元に仮想マシンを作成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multi/multi.html">複数の仮想マシンの操作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-define">仮想マシンの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#multi-same">共通した定義の取り扱い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi/multi.html#vagrant">Vagrant コマンド</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/appendix.html">付録</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbadditions.html">プラグインを使用した VB Guest Additions のインストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-vbmanual.html">VB Guest Additions の手動インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix/appendix-mac.html">IEEE が管理しているプライベート用 MAC アドレス（ 2020 年 2 月 9 日 確認）</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Windows 10 で Vagrant を使う</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>BOX ファイルの作成</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="box">
+<span id="package"></span><h1>BOX ファイルの作成<a class="headerlink" href="#box" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>作成した仮想マシンを元に Box ファイルを作成します。作成した Box ファイルを<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">box</span> <span class="pre">add</span></code>コマンドで登録して使用できます。作成した Box ファイルを配布することで、同じ環境を提供できます。</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>【トピックス】</strong></div>
+<div class="line">・ <a class="reference internal" href="#package-base"><span class="std std-ref">Box ファイルの元になる仮想マシンの作成</span></a></div>
+<div class="line">・ <a class="reference internal" href="#package-create"><span class="std std-ref">Box ファイルの作成</span></a></div>
+<div class="line">・ <a class="reference internal" href="#package-use"><span class="std std-ref">作成した Box ファイルの使用</span></a></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="package-base">
+<span id="id1"></span><h2>Box ファイルの元になる仮想マシンの作成<a class="headerlink" href="#package-base" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Box ファイルの元になる仮想マシンを作成します。今回は次の Vagrantfile で作成した仮想マシンを使用します。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$script = &lt;&lt;-&#39;SCRIPT&#39;
+yum -y update
+SCRIPT
+
+Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;centos/7&quot;
+  config.vm.network &quot;public_network&quot;, mac: &quot;00006C000001&quot;
+  config.vm.hostname = &quot;centos7sv&quot;
+  config.vm.provider &quot;virtualbox&quot; do |vb|
+    vb.gui = true
+    vb.name = &quot;centos7.7&quot;
+    vb.memory = &quot;4096&quot;
+    vb.cpus = 2
+    vb.customize [
+      &quot;modifyvm&quot;, :id,
+      &quot;--ioapic&quot;, &quot;on&quot;,
+      &quot;--graphicscontroller&quot;, &quot;vmsvga&quot;
+    ]
+  end
+  config.vm.provision &quot;shell&quot;, inline: $script
+end
+</pre></div>
+</div>
+<p>実行ログです。実行環境に<a class="reference internal" href="../appendix/appendix.html#appendix"><span class="std std-ref">付録</span></a>で記載した「<a class="reference internal" href="../appendix/appendix-vbadditions.html#appendix-vbadditions"><span class="std std-ref">プラグインを使用した VB Guest Additions のインストール</span></a>」を実行済みなので、 VB Guest Additions もインストールされます。プロビジョニングですべてのインストール済みパッケージをアップデートしたり、動作確認などもしているのでかなり長い実行ログです。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;centos/7&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Setting the name of the VM: centos7.7
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it&#39;s present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+[default] No Virtualbox Guest Additions installation found.
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cat.net
+ * extras: mirrors.cat.net
+ * updates: mirrors.cat.net
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package centos-release.x86_64 0:7-6.1810.2.el7.centos will be updated
+---&gt; Package centos-release.x86_64 0:7-7.1908.0.el7.centos will be an update
+--&gt; Finished Dependency Resolution
+
+＊＊＊省略＊＊＊
+
+Uncompressing VirtualBox 6.1.2 Guest Additions for Linux........
+VirtualBox Guest Additions installer
+Copying additional installer modules ...
+Installing additional modules ...
+VirtualBox Guest Additions: Starting.
+VirtualBox Guest Additions: Building the VirtualBox Guest Additions kernel
+modules.  This may take a while.
+VirtualBox Guest Additions: To build modules for other installed kernels, run
+VirtualBox Guest Additions:   /sbin/rcvboxadd quicksetup &lt;version&gt;
+VirtualBox Guest Additions: or
+VirtualBox Guest Additions:   /sbin/rcvboxadd quicksetup all
+VirtualBox Guest Additions: Building the modules for kernel
+3.10.0-957.12.2.el7.x86_64.
+Redirecting to /bin/systemctl start vboxadd.service
+Redirecting to /bin/systemctl start vboxadd-service.service
+Unmounting Virtualbox Guest Additions ISO from: /mnt
+==&gt; default: Checking for guest additions in VM...
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: Loaded plugins: fastestmirror
+    default: Loading mirror speeds from cached hostfile
+    default:  * base: mirrors.cat.net
+    default:  * extras: mirrors.cat.net
+    default:  * updates: mirrors.cat.net
+    default: Resolving Dependencies
+    default: --&gt; Running transaction check
+    default: ---&gt; Package GeoIP.x86_64 0:1.5.0-13.el7 will be updated
+
+＊＊＊省略＊＊＊
+
+    default:   yum.noarch 0:3.4.3-163.el7.centos
+    default:   yum-plugin-fastestmirror.noarch 0:1.1.31-52.el7
+    default:   yum-utils.noarch 0:1.1.31-52.el7
+    default: Complete!
+PS C:\vagrant\my_centos&gt; vagrant reload
+==&gt; default: Attempting graceful shutdown of VM...
+==&gt; default: Checking if box &#39;centos/7&#39; version &#39;1905.1&#39; is up to date...
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==&gt; default: Machine booted and ready!
+[default] GuestAdditions 6.1.2 running --- OK.
+==&gt; default: Checking for guest additions in VM...
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ =&gt; /vagrant
+==&gt; default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==&gt; default: flag to force provisioning. Provisioners marked to run always will still run.
+PS C:\vagrant\my_centos&gt; vagrant ssh
+[vagrant@centos7sv ~]$ hostname
+centos7sv
+[vagrant@centos7sv ~]$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:8a:fe:e6 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 86366sec preferred_lft 86366sec
+    inet6 fe80::5054:ff:fe8a:fee6/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:00:6c:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.37/24 brd 192.168.1.255 scope global noprefixroute dynamic eth1
+       valid_lft 14366sec preferred_lft 14366sec
+    inet6 fe80::200:6cff:fe00:1/64 scope link
+       valid_lft forever preferred_lft forever
+[vagrant@centos7sv ~]$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           3.7G        134M        3.4G        8.5M        150M        3.4G
+Swap:          2.0G          0B        2.0G
+[vagrant@centos7sv ~]$ cat /proc/cpuinfo
+processor       : 0
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 62
+model name      : Intel(R) Core(TM) i7-4930K CPU @ 3.40GHz
+stepping        : 4
+microcode       : 0x19
+cpu MHz         : 3402.072
+cache size      : 12288 KB
+physical id     : 0
+siblings        : 2
+core id         : 0
+cpu cores       : 2
+apicid          : 0
+initial apicid  : 0
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 13
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht
+ syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq ssse3 cx16 pcid sse4_1 s
+se4_2 x2apic popcnt aes xsave avx rdrand hypervisor lahf_lm fsgsbase flush_l1d
+bogomips        : 6804.14
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 46 bits physical, 48 bits virtual
+power management:
+
+processor       : 1
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 62
+model name      : Intel(R) Core(TM) i7-4930K CPU @ 3.40GHz
+stepping        : 4
+microcode       : 0x19
+cpu MHz         : 3402.072
+cache size      : 12288 KB
+physical id     : 0
+siblings        : 2
+core id         : 1
+cpu cores       : 2
+apicid          : 1
+initial apicid  : 1
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 13
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht
+ syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq ssse3 cx16 pcid sse4_1 s
+se4_2 x2apic popcnt aes xsave avx rdrand hypervisor lahf_lm fsgsbase flush_l1d
+bogomips        : 6804.14
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 46 bits physical, 48 bits virtual
+power management:
+
+[vagrant@centos7sv ~]$ logout
+Connection to 127.0.0.1 closed.
+PS C:\vagrant\my_centos&gt; ssh vagrant@192.168.1.37 -i C:\vagrant\my_centos\.vagrant\machines\default\virtualbox\private_key
+The authenticity of host &#39;192.168.1.37 (192.168.1.37)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:OGvzBcMkU+p1UVib5V1u6adTUK1VQC1L8Wb2/xogZEY.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &#39;192.168.1.37&#39; (ECDSA) to the list of known hosts.
+Last login: Tue Feb 11 03:21:47 2020 from 10.0.2.2
+[vagrant@centos7sv ~]$ logout
+Connection to 192.168.1.37 closed.
+PS C:\vagrant\my_centos&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+<div class="section" id="package-create">
+<span id="id2"></span><h2>Box ファイルの作成<a class="headerlink" href="#package-create" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>「<a class="reference internal" href="#package-base"><span class="std std-ref">Box ファイルの元になる仮想マシンの作成</span></a>」で作成した仮想マシンを元に<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">package</span></code>コマンドで Box ファイルを作成します。</p>
+<div class="section" id="package-create-options">
+<span id="id3"></span><h3>主なオプション<a class="headerlink" href="#package-create-options" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<dl class="option-list">
+<dt><kbd><span class="option">--output</span></kbd></dt>
+<dd><ul class="simple">
+<li><p>Box ファイル名を指定します。</p></li>
+<li><p>このオプションを省略したときの Box ファイル名は &quot;package.box&quot; です。</p></li>
+</ul>
+</dd>
+<dt><kbd><span class="option">--vagrantfile</span></kbd></dt>
+<dd><ul class="simple">
+<li><p>指定した Vagrantfile を取り込んだ Box ファイルを作成します。</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="package-create-use">
+<span id="id4"></span><h3>使用例<a class="headerlink" href="#package-create-use" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id5">
+<h4>オプションなし<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant package
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Exporting VM...
+==&gt; default: Compressing package to: C:/vagrant/my_centos/package.box
+PS C:\vagrant\my_centos&gt; ls
+
+
+    ディレクトリ: C:\vagrant\my_centos
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2020/02/11     12:09                .vagrant
+-a----       2020/02/11     13:19     1071263024 package.box
+-a----       2020/02/11     11:59            515 Vagrantfile
+
+
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="output">
+<h4>--output オプション<a class="headerlink" href="#output" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant package --output mycentos7.box
+==&gt; default: Exporting VM...
+==&gt; default: Compressing package to: C:/vagrant/my_centos/mycentos7.box
+PS C:\vagrant\my_centos&gt; ls
+
+
+    ディレクトリ: C:\vagrant\my_centos
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2020/02/11     12:09                .vagrant
+-a----       2020/02/11     13:22     1071262843 mycentos7.box
+-a----       2020/02/11     11:59            515 Vagrantfile
+
+
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-vagrantfile">
+<h4>--output オプションと --vagrantfile オプション<a class="headerlink" href="#output-vagrantfile" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; vagrant package --output mycentos7-custom.box --vagrantfile .\Vagrantfile
+==&gt; default: Exporting VM...
+==&gt; default: Compressing package to: C:/vagrant/my_centos/mycentos7-custom.box
+==&gt; default: Packaging additional file: .\Vagrantfile
+PS C:\vagrant\my_centos&gt; ls
+
+
+    ディレクトリ: C:\vagrant\my_centos
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2020/02/11     12:09                .vagrant
+-a----       2020/02/11     13:25     1071263119 mycentos7-custom.box
+-a----       2020/02/11     11:59            515 Vagrantfile
+
+
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+<div class="section" id="package-use">
+<span id="id6"></span><h2>作成した Box ファイルの使用<a class="headerlink" href="#package-use" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>作成した Box ファイルを実際に使用します。</p>
+<div class="section" id="package-use-list">
+<span id="id7"></span><h3>Box ファイルの登録<a class="headerlink" href="#package-use-list" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Box ファイルを使用するため<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">box</span> <span class="pre">add</span></code>コマンドで登録します。 Vagrant Cloud から Box ファイルを取得する場合とは違い、作成した Box ファイルの指定が必要です。今回は mycentos と mycentos-custom という名称で作成した Box ファイルを登録します。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\my_centos&gt; ls
+
+
+    ディレクトリ: C:\vagrant\my_centos
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2020/02/11     12:09                .vagrant
+-a----       2020/02/11     13:25     1071263119 mycentos7-custom.box
+-a----       2020/02/11     13:22     1071262843 mycentos7.box
+-a----       2020/02/11     13:19     1071263024 package.box
+-a----       2020/02/11     11:59            515 Vagrantfile
+
+
+PS C:\vagrant\my_centos&gt; vagrant box list
+centos/7 (virtualbox, 1905.1)
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant box add mycentos package.box
+==&gt; box: Box file was not detected as metadata. Adding it directly...
+==&gt; box: Adding box &#39;mycentos&#39; (v0) for provider:
+    box: Unpacking necessary files from: file://C:/vagrant/my_centos/package.box
+    box:
+==&gt; box: Successfully added box &#39;mycentos&#39; (v0) for &#39;virtualbox&#39;!
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant box add mycentos-custom .\mycentos7-custom.box
+==&gt; box: Box file was not detected as metadata. Adding it directly...
+==&gt; box: Adding box &#39;mycentos-custom&#39; (v0) for provider:
+    box: Unpacking necessary files from: file://C:/vagrant/my_centos/mycentos7-custom.box
+    box:
+==&gt; box: Successfully added box &#39;mycentos-custom&#39; (v0) for &#39;virtualbox&#39;!
+PS C:\vagrant\my_centos&gt;
+PS C:\vagrant\my_centos&gt; vagrant box list
+centos/7        (virtualbox, 1905.1)
+mycentos        (virtualbox, 0)
+mycentos-custom (virtualbox, 0)
+PS C:\vagrant\my_centos&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-use-exec">
+<span id="id8"></span><h3>Box ファイルを元に仮想マシンを作成<a class="headerlink" href="#package-use-exec" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Box ファイルを作成したフォルダーとは別のフォルダーで仮想マシンを作成し、内容を確認します。</p>
+<div class="section" id="vagrantfile-box">
+<span id="package-use-exec-novagrantfile"></span><h4>Vagrantfile を取り込まないで Box ファイルを作成した場合<a class="headerlink" href="#vagrantfile-box" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li><p>Ovacle VM VirtualBox マネージャーで仮想マシン自体のサマリーを確認すると、登録されている仮想マシン名がデフォルトになっていたり、ネットワークアダプターが 1 つだけなど、元の仮想マシンの仕様と多少の差異が発生しています。</p></li>
+<li><p>作成されたばかりの Vagrantfile は<code class="docutils literal notranslate"><span class="pre">config.vm.box</span></code>だけが定義されています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドのログを確認すると VB Guest Additions が導入されていることがわかります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code>コマンドで接続して確認すると、元の仮想マシンと同じホスト名になっており、各パッケージもアップデート済みです。</p></li>
+</ul>
+<img alt="../_images/2020-02-11_14h30_53.png" src="../_images/2020-02-11_14h30_53.png" />
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\test&gt; ls
+PS C:\vagrant\test&gt; vagrant init mycentos
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+PS C:\vagrant\test&gt; cat .\Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The &quot;2&quot; in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don&#39;t change it unless you know what
+# you&#39;re doing.
+Vagrant.configure(&quot;2&quot;) do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = &quot;mycentos&quot;
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
+  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080, host_ip: &quot;127.0.0.1&quot;
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network &quot;public_network&quot;
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder &quot;../data&quot;, &quot;/vagrant_data&quot;
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider &quot;virtualbox&quot; do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = &quot;1024&quot;
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision &quot;shell&quot;, inline: &lt;&lt;-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+end
+PS C:\vagrant\test&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;mycentos&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Setting the name of the VM: test_default_1581398944542_1280
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==&gt; default: Machine booted and ready!
+[default] GuestAdditions 6.1.2 running --- OK.
+==&gt; default: Checking for guest additions in VM...
+==&gt; default: Mounting shared folders...
+    default: /vagrant =&gt; C:/vagrant/test
+PS C:\vagrant\test&gt; vagrant ssh
+Last login: Tue Feb 11 03:24:13 2020 from 192.168.1.50
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ sudo yum -y update
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cat.net
+ * extras: mirrors.cat.net
+ * updates: mirrors.cat.net
+No packages marked for update
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:8a:fe:e6 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 86267sec preferred_lft 86267sec
+    inet6 fe80::5054:ff:fe8a:fee6/64 scope link
+       valid_lft forever preferred_lft forever
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ logout
+Connection to 127.0.0.1 closed.
+PS C:\vagrant\test&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\test&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-use-exec-vagrantfile">
+<span id="id9"></span><h4>Vagrantfile を取り込んで Box ファイルを作成した場合<a class="headerlink" href="#package-use-exec-vagrantfile" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li><p>Ovacle VM VirtualBox マネージャーで仮想マシン自体のサマリーを確認すると、仮想マシン名やネットワークアダプターの数や設定などが元になった仮想マシンのものと同じ設定になっています。</p></li>
+<li><p>作成されたばかりの Vagrantfile は<code class="docutils literal notranslate"><span class="pre">config.vm.box</span></code>だけが定義されています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>コマンドのログを確認すると VB Guest Additions が導入されていることがわかります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code>コマンドで接続して確認すると、元の仮想マシンと同じホスト名になっており、各パッケージもアップデート済み、MAC アドレスも同じになっています。</p></li>
+</ul>
+<img alt="../_images/2020-02-11_14h34_28.png" src="../_images/2020-02-11_14h34_28.png" />
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PS C:\vagrant\test&gt; ls
+PS C:\vagrant\test&gt; vagrant init mycentos-custom
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+PS C:\vagrant\test&gt; cat .\Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The &quot;2&quot; in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don&#39;t change it unless you know what
+# you&#39;re doing.
+Vagrant.configure(&quot;2&quot;) do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = &quot;mycentos-custom&quot;
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
+  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080, host_ip: &quot;127.0.0.1&quot;
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network &quot;public_network&quot;
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder &quot;../data&quot;, &quot;/vagrant_data&quot;
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider &quot;virtualbox&quot; do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = &quot;1024&quot;
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision &quot;shell&quot;, inline: &lt;&lt;-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+end
+PS C:\vagrant\test&gt; vagrant up
+Bringing machine &#39;default&#39; up with &#39;virtualbox&#39; provider...
+==&gt; default: Importing base box &#39;mycentos-custom&#39;...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Setting the name of the VM: centos7.7
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+==&gt; default: Forwarding ports...
+    default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Running &#39;pre-boot&#39; VM customizations...
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==&gt; default: Machine booted and ready!
+[default] GuestAdditions 6.1.2 running --- OK.
+==&gt; default: Checking for guest additions in VM...
+==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+==&gt; default: Mounting shared folders...
+    default: /vagrant =&gt; C:/vagrant/test
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+    default: Loaded plugins: fastestmirror
+    default: Loading mirror speeds from cached hostfile
+    default:  * base: mirrors.cat.net
+    default:  * extras: mirrors.cat.net
+    default:  * updates: mirrors.cat.net
+    default: No packages marked for update
+PS C:\vagrant\test&gt; vagrant ssh
+Last login: Tue Feb 11 03:24:13 2020 from 192.168.1.50
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ sudo yum -y update
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cat.net
+ * extras: mirrors.cat.net
+ * updates: mirrors.cat.net
+No packages marked for update
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:8a:fe:e6 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 86324sec preferred_lft 86324sec
+    inet6 fe80::5054:ff:fe8a:fee6/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:00:6c:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.37/24 brd 192.168.1.255 scope global noprefixroute dynamic eth1
+       valid_lft 14324sec preferred_lft 14324sec
+    inet6 fe80::200:6cff:fe00:1/64 scope link
+       valid_lft forever preferred_lft forever
+[vagrant@centos7sv ~]$
+[vagrant@centos7sv ~]$ logout
+Connection to 127.0.0.1 closed.
+PS C:\vagrant\test&gt;
+PS C:\vagrant\test&gt; vagrant halt
+==&gt; default: Attempting graceful shutdown of VM...
+PS C:\vagrant\test&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../multi/multi.html" class="btn btn-neutral float-right" title="複数の仮想マシンの操作" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../provisioning/provisioning.html" class="btn btn-neutral float-left" title="プロビジョニング" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Yoichi Muraoka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

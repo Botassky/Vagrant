@@ -1,0 +1,93 @@
+.. _package-create:
+
+Box ファイルの作成
+----------------------------------------------------------------------------------------------------
+「 :ref:`package-base` 」で作成した仮想マシンを元に ``vagrant package`` コマンドで Box ファイルを作成します。
+
+.. _package-create-options:
+
+主なオプション
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+--output
+   - Box ファイル名を指定します。
+   - このオプションを省略したときの Box ファイル名は "package.box" です。
+
+--vagrantfile
+   - 指定した Vagrantfile を取り込んだ Box ファイルを作成します。
+
+.. _package-create-use:
+
+使用例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+オプションなし
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: none
+
+   PS C:\vagrant\my_centos> vagrant package
+   ==> default: Clearing any previously set forwarded ports...
+   ==> default: Exporting VM...
+   ==> default: Compressing package to: C:/vagrant/my_centos/package.box
+   PS C:\vagrant\my_centos> ls
+   
+   
+       ディレクトリ: C:\vagrant\my_centos
+   
+   
+   Mode                LastWriteTime         Length Name
+   ----                -------------         ------ ----
+   d-----       2020/02/11     12:09                .vagrant
+   -a----       2020/02/11     13:19     1071263024 package.box
+   -a----       2020/02/11     11:59            515 Vagrantfile
+   
+   
+   PS C:\vagrant\my_centos> 
+
+--output オプション
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: none
+
+   PS C:\vagrant\my_centos> vagrant package --output mycentos7.box
+   ==> default: Exporting VM...
+   ==> default: Compressing package to: C:/vagrant/my_centos/mycentos7.box
+   PS C:\vagrant\my_centos> ls
+   
+   
+       ディレクトリ: C:\vagrant\my_centos
+   
+   
+   Mode                LastWriteTime         Length Name
+   ----                -------------         ------ ----
+   d-----       2020/02/11     12:09                .vagrant
+   -a----       2020/02/11     13:22     1071262843 mycentos7.box
+   -a----       2020/02/11     11:59            515 Vagrantfile
+   
+   
+   PS C:\vagrant\my_centos> 
+
+--output オプションと --vagrantfile オプション
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: none
+
+   PS C:\vagrant\my_centos> vagrant package --output mycentos7-custom.box --vagrantfile .\Vagrantfile
+   ==> default: Exporting VM...
+   ==> default: Compressing package to: C:/vagrant/my_centos/mycentos7-custom.box
+   ==> default: Packaging additional file: .\Vagrantfile
+   PS C:\vagrant\my_centos> ls
+   
+   
+       ディレクトリ: C:\vagrant\my_centos
+   
+   
+   Mode                LastWriteTime         Length Name
+   ----                -------------         ------ ----
+   d-----       2020/02/11     12:09                .vagrant
+   -a----       2020/02/11     13:25     1071263119 mycentos7-custom.box
+   -a----       2020/02/11     11:59            515 Vagrantfile
+   
+   
+   PS C:\vagrant\my_centos> 
