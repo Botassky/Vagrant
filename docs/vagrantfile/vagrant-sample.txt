@@ -1,0 +1,174 @@
+.. _vagrant-sample:
+
+Vagrantfile の設定例
+----------------------------------------------------------------------------------------------------
+
++------------------+--------------+
+| 仮想マシン名     | sample-vm    |
++------------------+--------------+
+| CPU              | 2            |
++------------------+--------------+
+| メモリ           | 4GB(4096MB)  |
++------------------+--------------+
+| ネットワーク接続 | ブリッジ     |
++------------------+--------------+
+| MAC アドレス     | 080027000001 |
++------------------+--------------+
+| ビデオカード     | vmsvga       |
++------------------+--------------+
+| コンソール       | 表示         |
++------------------+--------------+
+| ホスト名         | node1        |
++------------------+--------------+
+| IP アドレス      | 192.168.10.1 |
++------------------+--------------+
+
+.. code-block:: none
+
+   Vagrant.configure("2") do |config|
+     config.vm.box = "centos/7"
+     config.vm.network "public_network", mac: "080027000001", ip: "192.168.10.1"
+     config.vm.hostname = "node1"
+     config.vm.provider "virtualbox" do |vb|
+       vb.gui = true
+       vb.name = "sample-vm"
+       vb.memory = "4096"
+       vb.cpus = 2
+       vb.customize [
+         "modifyvm", :id,
+         "--ioapic", "on",
+         "--graphicscontroller", "vmsvga"
+       ]
+     end
+   end
+
+.. code-block:: none
+
+   PS C:\vagrant\my_centos> vagrant up
+   Bringing machine 'default' up with 'virtualbox' provider...
+   ==> default: Importing base box 'centos/7'...
+   ==> default: Matching MAC address for NAT networking...
+   ==> default: Checking if box 'centos/7' version '1905.1' is up to date...
+   ==> default: Setting the name of the VM: sample-vm
+   ==> default: Clearing any previously set network interfaces...
+   ==> default: Preparing network interfaces based on configuration...
+       default: Adapter 1: nat
+       default: Adapter 2: bridged
+   ==> default: Forwarding ports...
+       default: 22 (guest) => 2222 (host) (adapter 1)
+   ==> default: Running 'pre-boot' VM customizations...
+   ==> default: Booting VM...
+   ==> default: Waiting for machine to boot. This may take a few minutes...
+       default: SSH address: 127.0.0.1:2222
+       default: SSH username: vagrant
+       default: SSH auth method: private key
+       default:
+       default: Vagrant insecure key detected. Vagrant will automatically replace
+       default: this with a newly generated keypair for better security.
+       default:
+       default: Inserting generated public key within guest...
+       default: Removing insecure key from the guest if it's present...
+       default: Key inserted! Disconnecting and reconnecting using new SSH key...
+   ==> default: Machine booted and ready!
+   ==> default: Checking for guest additions in VM...
+       default: No guest additions were detected on the base box for this VM! Guest
+       default: additions are required for forwarded ports, shared folders, host only
+       default: networking, and more. If SSH fails on this machine, please install
+       default: the guest additions and repackage the box to continue.
+       default:
+       default: This is not an error message; everything may continue to work properly,
+       default: in which case you may ignore this message.
+   ==> default: Setting hostname...
+   ==> default: Configuring and enabling network interfaces...
+   ==> default: Rsyncing folder: /cygdrive/c/vagrant/my_centos/ => /vagrant
+   PS C:\vagrant\my_centos>
+   PS C:\vagrant\my_centos> vagrant ssh
+   [vagrant@node1 ~]$
+   [vagrant@node1 ~]$ hostname
+   node1
+   [vagrant@node1 ~]$
+   [vagrant@node1 ~]$ ip a
+   1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+       link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+       inet 127.0.0.1/8 scope host lo
+          valid_lft forever preferred_lft forever
+       inet6 ::1/128 scope host
+          valid_lft forever preferred_lft forever
+   2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+       link/ether 52:54:00:8a:fe:e6 brd ff:ff:ff:ff:ff:ff
+       inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+          valid_lft 86348sec preferred_lft 86348sec
+       inet6 fe80::5054:ff:fe8a:fee6/64 scope link
+          valid_lft forever preferred_lft forever
+   3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+       link/ether 08:00:27:00:00:01 brd ff:ff:ff:ff:ff:ff
+       inet 192.168.10.1/24 brd 192.168.10.255 scope global noprefixroute eth1
+          valid_lft forever preferred_lft forever
+       inet6 fe80::a00:27ff:fe00:1/64 scope link
+          valid_lft forever preferred_lft forever
+   [vagrant@node1 ~]$
+   [vagrant@node1 ~]$ free -h
+                 total        used        free      shared  buff/cache   available
+   Mem:           3.7G        106M        3.5G        8.5M        137M        3.4G
+   Swap:          2.0G          0B        2.0G
+   [vagrant@node1 ~]$
+   [vagrant@node1 ~]$ cat /proc/cpuinfo
+   processor       : 0
+   vendor_id       : GenuineIntel
+   cpu family      : 6
+   model           : 62
+   model name      : Intel(R) Core(TM) i7-4930K CPU @ 3.40GHz
+   stepping        : 4
+   microcode       : 0x19
+   cpu MHz         : 3402.072
+   cache size      : 12288 KB
+   physical id     : 0
+   siblings        : 2
+   core id         : 0
+   cpu cores       : 2
+   apicid          : 0
+   initial apicid  : 0
+   fpu             : yes
+   fpu_exception   : yes
+   cpuid level     : 13
+   wp              : yes
+   flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq ssse3 cx16 pcid sse4_1 sse4_2 x2apic popcnt aes xsave avx rdrand hypervisor lahf_lm fsgsbase flush_l1d
+   bogomips        : 6804.14
+   clflush size    : 64
+   cache_alignment : 64
+   address sizes   : 46 bits physical, 48 bits virtual
+   power management:
+   
+   processor       : 1
+   vendor_id       : GenuineIntel
+   cpu family      : 6
+   model           : 62
+   model name      : Intel(R) Core(TM) i7-4930K CPU @ 3.40GHz
+   stepping        : 4
+   microcode       : 0x19
+   cpu MHz         : 3402.072
+   cache size      : 12288 KB
+   physical id     : 0
+   siblings        : 2
+   core id         : 1
+   cpu cores       : 2
+   apicid          : 1
+   initial apicid  : 1
+   fpu             : yes
+   fpu_exception   : yes
+   cpuid level     : 13
+   wp              : yes
+   flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq ssse3 cx16 pcid sse4_1 sse4_2 x2apic popcnt aes xsave avx rdrand hypervisor lahf_lm fsgsbase flush_l1d
+   bogomips        : 6804.14
+   clflush size    : 64
+   cache_alignment : 64
+   address sizes   : 46 bits physical, 48 bits virtual
+   power management:
+   
+   [vagrant@node1 ~]$
+   [vagrant@node1 ~]$ logout
+   Connection to 127.0.0.1 closed.
+   PS C:\vagrant\my_centos>
+   PS C:\vagrant\my_centos> vagrant halt
+   ==> default: Attempting graceful shutdown of VM...
+   PS C:\vagrant\my_centos>

@@ -1,0 +1,153 @@
+.. _multi-define:
+
+仮想マシンの定義
+----------------------------------------------------------------------------------------------------
+``config.vm.define`` を使用して、仮想マシンごとに定義します。   ``config.vm.define`` の後に定義した名前
+（ websv, dbsv ）が Vagrant 内の仮想マシンの識別名です。
+
+.. code-block:: none
+
+   config.vm.define :websv do |web|
+     仮想マシンごとの定義
+   end
+
+Web サーバーとデータベースサーバーの 2 台の仮想マシンを定義した Vagrantfile です。
+
+.. code-block:: none
+
+   $scriptweb = <<-'SCRIPT'
+   echo hello, Web world
+   SCRIPT
+   $scriptdb = <<-'SCRIPT'
+   echo hello, db world
+   SCRIPT
+   
+   Vagrant.configure("2") do |config|
+     config.vm.define :websv do |web|
+       web.vm.box = "centos/7"
+       web.vm.network "public_network", mac: "080027000001"
+       web.vm.hostname = "websv"
+       web.vm.provider "virtualbox" do |vb|
+         vb.gui = true
+         vb.name = "webserver"
+         vb.memory = "4096"
+         vb.cpus = 2
+         vb.customize [
+           "modifyvm", :id,
+           "--ioapic", "on",
+           "--graphicscontroller", "vmsvga"
+         ]
+       end
+       web.vm.provision "shell", inline: $scriptweb
+     end
+     
+     config.vm.define :dbsv do |db|
+       db.vm.box = "centos/7"
+       db.vm.network "public_network", mac: "080027000002"
+       db.vm.hostname = "dbsv"
+       db.vm.provider "virtualbox" do |vb|
+         vb.gui = true
+         vb.name = "dbserver"
+         vb.memory = "4096"
+         vb.cpus = 2
+         vb.customize [
+           "modifyvm", :id,
+           "--ioapic", "on",
+           "--graphicscontroller", "vmsvga"
+         ]
+       end
+       db.vm.provision "shell", inline: $scriptdb
+     end
+   end
+
+実行結果です。ログの各行の先頭に Vagrant 内の仮想マシンの識別名が表示されます。一部のコマンドを
+除いて ``vagrant up`` や ``vagrant halt`` など仮想マシンに対するコマンドはすべての仮想マシンに
+適用されます。
+
+.. code-block:: none
+
+   PS C:\vagrant\multi> vagrant up
+   Bringing machine 'websv' up with 'virtualbox' provider...
+   Bringing machine 'dbsv' up with 'virtualbox' provider...
+   ==> websv: Importing base box 'centos/7'...
+   ==> websv: Matching MAC address for NAT networking...
+   ==> websv: Checking if box 'centos/7' version '1905.1' is up to date...
+   ==> websv: Setting the name of the VM: webserver
+   ==> websv: Clearing any previously set network interfaces...
+   ==> websv: Preparing network interfaces based on configuration...
+       websv: Adapter 1: nat
+       websv: Adapter 2: bridged
+   ==> websv: Forwarding ports...
+       websv: 22 (guest) => 2222 (host) (adapter 1)
+   ==> websv: Running 'pre-boot' VM customizations...
+   ==> websv: Booting VM...
+   ==> websv: Waiting for machine to boot. This may take a few minutes...
+       websv: SSH address: 127.0.0.1:2222
+       websv: SSH username: vagrant
+       websv: SSH auth method: private key
+       websv:
+       websv: Vagrant insecure key detected. Vagrant will automatically replace
+       websv: this with a newly generated keypair for better security.
+       websv:
+       websv: Inserting generated public key within guest...
+       websv: Removing insecure key from the guest if it's present...
+       websv: Key inserted! Disconnecting and reconnecting using new SSH key...
+   ==> websv: Machine booted and ready!
+   ==> websv: Checking for guest additions in VM...
+       websv: No guest additions were detected on the base box for this VM! Guest
+       websv: additions are required for forwarded ports, shared folders, host only
+       websv: networking, and more. If SSH fails on this machine, please install
+       websv: the guest additions and repackage the box to continue.
+       websv:
+       websv: This is not an error message; everything may continue to work properly,
+       websv: in which case you may ignore this message.
+   ==> websv: Setting hostname...
+   ==> websv: Configuring and enabling network interfaces...
+   ==> websv: Rsyncing folder: /cygdrive/c/vagrant/multi/ => /vagrant
+   ==> websv: Running provisioner: shell...
+       websv: Running: inline script
+       websv: hello, Web world
+   ==> dbsv: Importing base box 'centos/7'...
+   ==> dbsv: Matching MAC address for NAT networking...
+   ==> dbsv: Checking if box 'centos/7' version '1905.1' is up to date...
+   ==> dbsv: Setting the name of the VM: dbserver
+   ==> dbsv: Fixed port collision for 22 => 2222. Now on port 2200.
+   ==> dbsv: Clearing any previously set network interfaces...
+   ==> dbsv: Preparing network interfaces based on configuration...
+       dbsv: Adapter 1: nat
+       dbsv: Adapter 2: bridged
+   ==> dbsv: Forwarding ports...
+       dbsv: 22 (guest) => 2200 (host) (adapter 1)
+   ==> dbsv: Running 'pre-boot' VM customizations...
+   ==> dbsv: Booting VM...
+   ==> dbsv: Waiting for machine to boot. This may take a few minutes...
+       dbsv: SSH address: 127.0.0.1:2200
+       dbsv: SSH username: vagrant
+       dbsv: SSH auth method: private key
+       dbsv:
+       dbsv: Vagrant insecure key detected. Vagrant will automatically replace
+       dbsv: this with a newly generated keypair for better security.
+       dbsv:
+       dbsv: Inserting generated public key within guest...
+       dbsv: Removing insecure key from the guest if it's present...
+       dbsv: Key inserted! Disconnecting and reconnecting using new SSH key...
+   ==> dbsv: Machine booted and ready!
+   ==> dbsv: Checking for guest additions in VM...
+       dbsv: No guest additions were detected on the base box for this VM! Guest
+       dbsv: additions are required for forwarded ports, shared folders, host only
+       dbsv: networking, and more. If SSH fails on this machine, please install
+       dbsv: the guest additions and repackage the box to continue.
+       dbsv:
+       dbsv: This is not an error message; everything may continue to work properly,
+       dbsv: in which case you may ignore this message.
+   ==> dbsv: Setting hostname...
+   ==> dbsv: Configuring and enabling network interfaces...
+   ==> dbsv: Rsyncing folder: /cygdrive/c/vagrant/multi/ => /vagrant
+   ==> dbsv: Running provisioner: shell...
+       dbsv: Running: inline script
+       dbsv: hello, db world
+   PS C:\vagrant\multi>
+   PS C:\vagrant\multi> vagrant halt
+   ==> dbsv: Attempting graceful shutdown of VM...
+   ==> websv: Attempting graceful shutdown of VM...
+   PS C:\vagrant\multi>  

@@ -1,0 +1,13 @@
+.. _vagrant-parameter-vbgui:
+
+vb.gui
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- VirtualBox の起動モードを指定する。
+- 指定がないときはヘッドレスモードで起動する。 
+- GUI モードで起動（コンソールを起動）する。
+
+.. code-block:: none
+
+   config.vm.provider "virtualbox" do |vb|
+      vb.gui = true
+   end

@@ -1,0 +1,15 @@
+.. _vagrant-parameter-vbcpu:
+
+vb.cpu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- 仮想マシンの CPU の数を指定します。
+
+.. code-block:: none
+
+   config.vm.provider "virtualbox" do |vb|
+     vb.cpus = 2
+     vb.customize [
+       "modifyvm", :id,
+       "--ioapic", "on"
+     ]
+   end
