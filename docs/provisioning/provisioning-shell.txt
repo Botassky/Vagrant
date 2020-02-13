@@ -1,6 +1,0 @@
-.. _provisioning-shell:
-
-シェル
-----------------------------------------------------------------------------------------------------
-.. include:: ./provisioning-shell-inline.txt
-.. include:: ./provisioning-shell-external.txt

@@ -1,9 +1,0 @@
-.. _vagrant-parameter-hostname:
-
-config.vm.hostname
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- 仮想マシンのホスト名を指定する。
-
-.. code-block:: none
-
-   config.vm.hostname = "node1"
