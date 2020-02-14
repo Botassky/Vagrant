@@ -9,6 +9,7 @@
    vagrant ssh
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant ssh
    [vagrant@localhost ~]$

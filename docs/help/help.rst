@@ -8,6 +8,7 @@
 | :command:`vagrant <COMMAND> <SUBCOMMAND> -h`
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\Users\user> vagrant -h
    Usage: vagrant [options] <command> [<args>]
@@ -53,6 +54,7 @@
    PS C:\Users\user> 
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\Users\user> vagrant box -h
    Usage: vagrant box <subcommand> [<args>]
@@ -70,6 +72,7 @@
    PS C:\Users\user>  
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\Users\user> vagrant box add -h
    Usage: vagrant box add [options] <name, url, or path>

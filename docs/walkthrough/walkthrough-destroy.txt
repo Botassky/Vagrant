@@ -9,6 +9,7 @@
    vagrant destroy
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant destroy
        default: Are you sure you want to destroy the 'default' VM? [y/N] y

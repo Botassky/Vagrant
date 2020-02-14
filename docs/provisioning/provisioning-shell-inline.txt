@@ -22,6 +22,7 @@ $script 変数に設定した 1 つ以上のコマンドを順番に実行しま
 Vagrantfile の全体です。
 
 .. code-block:: none
+   :emphasize-lines: 1-4,21
 
    $script = <<-'SCRIPT'
    echo hello, world
@@ -46,9 +47,10 @@ Vagrantfile の全体です。
      config.vm.provision "shell", inline: $script
    end
 
-実行結果です。 
+実行結果です。 ``echo`` コマンドの実行結果が表示されています。
 
 .. code-block:: none
+   :emphasize-lines: 38-41
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...
@@ -93,18 +95,10 @@ Vagrantfile の全体です。
        default: hello, Vagrant world !
    PS C:\vagrant\my_centos> 
 
-プロビジョニング部分を切り出した実行結果です。 ``echo`` コマンドの実行結果が表示されています。
-
-.. code-block:: none
-
-   ==> default: Running provisioner: shell...
-       default: Running: inline script
-       default: hello, world
-       default: hello, Vagrant world !
-
 複数のスクリプトの実行もできます。
 
 .. code-block:: none
+   :emphasize-lines: 1-6,23-24
 
    $script = <<-'SCRIPT'
    echo hello, world
@@ -132,9 +126,10 @@ Vagrantfile の全体です。
      config.vm.provision "shell", inline: $script2
    end
 
-実行結果です。
+実行結果です。 ``config.vm.provision`` が 2 回実行されています。
 
 .. code-block:: none
+   :emphasize-lines: 39-44
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...
@@ -182,17 +177,6 @@ Vagrantfile の全体です。
        default: hello, Vagrant world !
    PS C:\vagrant\my_centos> 
 
-プロビジョニング部分の実行結果です。 ``config.vm.provision`` が 2 回実行されています。
-
-.. code-block:: none
-
-   ==> default: Running provisioner: shell...
-       default: Running: inline script
-       default: hello, world
-   ==> default: Running provisioner: shell...
-       default: Running: inline script
-       default: hello, Vagrant world !
-
 nginx を使用した Web サーバーを構築する Vagrantfile です。
 
 .. code-block:: none
@@ -227,7 +211,7 @@ nginx を使用した Web サーバーを構築する Vagrantfile です。
 
 実行結果です。
 
-code-block::
+.. code-block:: none
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...

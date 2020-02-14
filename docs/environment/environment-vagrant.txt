@@ -61,6 +61,7 @@ Vagrant をダンロード・インストールします。
 | :command:`vagrant -v`
 
 .. code-block:: none
+   :emphasize-lines: 1,4
 
    PS C:\Users\user> vagrant --version
    Vagrant 2.2.7

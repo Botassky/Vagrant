@@ -2,9 +2,11 @@
 
 基本動作
 ----------------------------------------------------------------------------------------------------
-プロビジョニングを指定した Vagrantfile です。 Linux コマンドを実行するよう設定しました。
+プロビジョニングを指定した Vagrantfile です。 Linux コマンドを実行するよう設定しました。網掛け部分がプロビジ
+ョニングに関係する部分です。
 
 .. code-block:: none
+   :emphasize-lines: 1-3,20
 
    $script = <<-'SCRIPT'
    echo hello, world
@@ -28,21 +30,10 @@
      config.vm.provision "shell", inline: $script
    end
 
-プロビジョニングの部分です。
-
-.. code-block:: none
-
-   $script = <<-'SCRIPT'
-   echo hello, world
-   SCRIPT
-
-.. code-block:: none
-
-     config.vm.provision "shell", inline: $script
-
 仮想マシンが存在しない状態で ``vagrant up``　→　``vagrant halt``　→　``vagrant up`` →　``vagrant halt`` を実行した結果です。
 
 .. code-block:: none
+   :emphasize-lines: 38-40,75-76
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...
@@ -154,6 +145,7 @@
 実行した結果です。プロビジョニングが動作しました。
 
 .. code-block:: none
+   :emphasize-lines: 1,29-31
 
    PS C:\vagrant\my_centos> vagrant up --provision
    Bringing machine 'default' up with 'virtualbox' provider...
@@ -196,6 +188,7 @@
 ``run: "always"`` を指定すると常にプロビジョニングが動作します。
 
 .. code-block:: none
+   :emphasize-lines: 20
 
    $script = <<-'SCRIPT'
    echo hello, world
@@ -220,6 +213,7 @@
    end
 
 .. code-block:: none
+   :emphasize-lines: 31-33
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...

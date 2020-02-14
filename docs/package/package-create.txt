@@ -25,6 +25,7 @@ Box ファイルの作成
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\my_centos> vagrant package
    ==> default: Clearing any previously set forwarded ports...
@@ -49,6 +50,7 @@ Box ファイルの作成
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\my_centos> vagrant package --output mycentos7.box
    ==> default: Exporting VM...
@@ -72,6 +74,7 @@ Box ファイルの作成
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\my_centos> vagrant package --output mycentos7-custom.box --vagrantfile .\Vagrantfile
    ==> default: Exporting VM...

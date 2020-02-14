@@ -13,6 +13,7 @@ Box ファイルを使用するため ``vagrant box add`` コマンドで登録�
 た Box ファイルを登録します。
 
 .. code-block:: none
+   :emphasize-lines: 16,19,26,33,35-36
 
    PS C:\vagrant\my_centos> ls
    

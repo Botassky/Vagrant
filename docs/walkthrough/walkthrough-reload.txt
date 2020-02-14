@@ -11,6 +11,7 @@
 出力されたメッセージで shutdown　→　boot していることがわかります。
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant reload
    ==> default: Attempting graceful shutdown of VM...

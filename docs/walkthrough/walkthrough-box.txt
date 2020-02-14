@@ -12,6 +12,7 @@ Box ファイルをダウンロード
    vagrant box list
 
 .. code-block:: none
+   :emphasize-lines: 1,4,23
 
    PS C:\Users\user> vagrant box list
    There are no installed boxes! Use `vagrant box add` to add some.

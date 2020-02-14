@@ -42,6 +42,7 @@ Vagrant で作成した仮想マシンに VB Guest Additions をインストー�
    ==> default: Checking for guest additions in VM...
 
 .. code-block:: none
+   :emphasize-lines: 27-34,522-523
 
    PS C:\vagrant\my_centos> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...

@@ -11,6 +11,7 @@ Box ファイルを削除
    vagrant box list
 
 .. code-block:: none
+   :emphasize-lines: 1,4,15
 
    PS C:\vagrant\centos7> vagrant box list
    centos/7 (virtualbox, 1905.1)

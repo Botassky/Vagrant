@@ -9,6 +9,7 @@
    vagrant halt
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant halt
    ==> default: Attempting graceful shutdown of VM...

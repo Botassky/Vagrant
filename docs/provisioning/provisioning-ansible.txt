@@ -9,7 +9,7 @@ Ansible を使用してプロビジョニングします。 :ref:`provisioning-s
 
   プロビジョニング対象の仮想マシンに Ansible がインストールされていないときは自動でインストールされます。
 
-プレイブックファイルと実行部分です。
+プロビジョニングで実行するプレイブックファイルです。
 
 .. code-block:: none
 
@@ -55,6 +55,7 @@ Ansible を使用してプロビジョニングします。 :ref:`provisioning-s
 Vagrantfile の全体です。
 
 .. code-block:: none
+   :emphasize-lines: 16-18
 
    Vagrant.configure("2") do |config|
      config.vm.box = "centos/7"

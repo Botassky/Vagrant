@@ -9,6 +9,7 @@
    vagrant suspend
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant suspend
    ==> default: Saving VM state and suspending execution...

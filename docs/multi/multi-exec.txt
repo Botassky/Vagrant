@@ -12,6 +12,7 @@ Vagrant コマンド
 仮想マシン名を指定した実行結果です。
 
 .. code-block:: none
+   :emphasize-lines: 1,45,90,115,140,150
 
    PS C:\vagrant\multi> vagrant up dbsv
    Bringing machine 'dbsv' up with 'virtualbox' provider...

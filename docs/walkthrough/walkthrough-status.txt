@@ -13,6 +13,7 @@
    vagrant status
 
 .. code-block:: none
+   :emphasize-lines: 1,8,38,48,51
 
    PS C:\vagrant\centos7> vagrant status
    Current machine states:

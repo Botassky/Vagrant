@@ -10,6 +10,7 @@ Box ファイルと Vagrant ファイルが揃ったので、仮想マシンを�
    vagrant up
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...

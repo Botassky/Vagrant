@@ -10,6 +10,7 @@
    vagrant up
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant up
    Bringing machine 'default' up with 'virtualbox' provider...
@@ -30,6 +31,7 @@
    vagrant resume
 
 .. code-block:: none
+   :emphasize-lines: 1
 
    PS C:\vagrant\centos7> vagrant resume
    ==> default: Resuming suspended VM...
