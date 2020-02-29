@@ -34,3 +34,4 @@ Vagrant とは
    ./package/package
    ./multi/multi
    ./appendix/appendix
+   ./changelog/changelog
